@@ -1,0 +1,37 @@
+@import "~@angular/material/theming";
+
+@mixin app-table-pagination-theme($theme) {
+
+  $config_color: map-get($theme, color);
+  $background: map-get($config_color, background);
+  $foreground: map-get($config_color, foreground);
+
+  // @debug "|==> map_background: #{ $theme }";
+
+  tr.mat-row {
+    height: 32px !important;
+    &:hover {
+      background-color: mat-color($background, 'hover') !important;
+    }
+
+    & td.mat-cell button.mat-icon-button {
+      height: 36px !important;
+      line-height: 25px !important;
+    }
+  }
+
+  tr.mat-row:nth-child(odd) {
+    background-color: mat-color($background, 'background');
+  }
+
+  tr.mat-header-row {
+    height: 42px !important;
+    background-color: mat-color($background, 'card');
+  }
+
+  select option {
+    background: mat-color($background, 'card');
+    color: mat-color($foreground, text) !important;
+  }
+
+}

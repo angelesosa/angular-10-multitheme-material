@@ -1,0 +1,35 @@
+<mat-form-field [appearance]="appearance" >
+  <mat-label>{{label}}</mat-label>
+  <input matInput *ngIf="!mask"
+    autocomplete="off"
+    type="text"
+    (input)="onInput($event.target.value)"
+    (keydown.esc)="esc()"
+    (keydown.enter)="setEnter()"
+    [formControl]="value"
+    [readonly]="isReadonly"
+  >
+
+  <input matInput *ngIf="mask"
+    autocomplete="off"
+    type="text"
+    (input)="onInput($event.target.value)"
+    (keydown.esc)="esc()"
+    (keydown.enter)="setEnter()"
+    [formControl]="value"
+    [readonly]="isReadonly"
+
+    [mask]="mask"
+    [showMaskTyped]="showMaskTyped || false"
+    [suffix]="suffix || ''"
+    [prefix]="prefix || ''"
+  >
+
+  <mat-icon *ngIf="icon && alignIcon == 'right'" (click)="setOnClick()" matSuffix>{{ icon }}</mat-icon>
+  <mat-icon *ngIf="icon && alignIcon == 'left'" (click)="setOnClick()" matPrefix>{{ icon }}</mat-icon>
+
+  <mat-hint style="color:red" *ngIf="error && error.invalid && (error.dirty || error.touched)">
+	{{ getMessage() }}
+  </mat-hint>
+
+</mat-form-field>

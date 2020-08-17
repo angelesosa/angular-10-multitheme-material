@@ -1,0 +1,14 @@
+<div class="timer-container">
+
+  <div class="time-container">
+    {{ leftoverTime * 1000 | date:'mm:ss' : 'UTC'}}
+  </div>
+
+  <mat-progress-spinner
+  class="example-margin"
+  [color]="color"
+  [mode]="mode"
+  [value]="progress">
+  </mat-progress-spinner>
+
+</div>

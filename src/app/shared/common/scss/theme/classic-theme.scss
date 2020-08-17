@@ -1,0 +1,22 @@
+//*
+//*
+//*
+// util
+@import '../../../core/scss/themes/theme-functions';
+// palettes
+@import './palettes/classic-primary';
+@import './palettes/classic-accent';
+@import './palettes/classic-warn';
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$app-classic-theme: mat-light-theme((
+  color: (
+    primary: $classic-palette-primary,
+    accent: $classic-palette-accent,
+    warn: $classic-palette-warn,
+  )
+));
+
+// Change background background
+// $app-classic-theme: map_merge_config_color_theme_material($app-classic-theme, foreground, text, white);

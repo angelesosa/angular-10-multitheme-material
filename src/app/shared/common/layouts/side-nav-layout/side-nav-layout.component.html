@@ -1,0 +1,16 @@
+<div class="sidenav" [class.sidenav__collapsed]="!isExpanded">
+	<div class="sidenav__logo">
+		<ng-content select="[sidenav__logo]"></ng-content>
+	</div>
+	<div class="sidenav__groups">
+		<div class="sidenav__groups__items">
+			<ng-content select="[sidenav__groups__items]"></ng-content>
+		</div>
+	</div>
+	<div class="sidenav__links__items">
+		<ng-content select="[sidenav__links__items]"></ng-content>
+	</div>
+	<div class="sidenav__toggle" (click)="toggle()">
+		<ng-content select="[sidenav__toggle]"></ng-content>
+	</div>
+</div>

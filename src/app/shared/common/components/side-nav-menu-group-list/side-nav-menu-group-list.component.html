@@ -1,0 +1,10 @@
+<div class="menugrouplist">
+	<app-side-nav-menu-group
+		*ngFor="let menu of menuGroups"
+		[menuid]="menu.menuid"
+		[name]="menu.name"
+		[menuGroupListOpened]="menuGroupListOpened"
+		[items]="menu.items"
+		[showChanges]="false"
+	></app-side-nav-menu-group>
+</div>

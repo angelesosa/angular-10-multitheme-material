@@ -1,0 +1,50 @@
+.sidenav {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+  width: 256px;
+  // transition: width 0.2s;
+
+  &__collapsed {
+    width: 68px;
+	}
+
+	&__logo {
+		flex: 0 0 64px;
+
+		&__img {
+		}
+
+		&__app_name {
+		}
+	}
+
+	&__groups {
+		flex: 1;
+		overflow: auto;
+		visibility: hidden;
+		transition: visibility 0.2s;
+
+		&__items {
+      visibility: visible;
+    }
+
+
+	}
+
+  @media screen and (max-width: 1024px) {
+    &__groups {
+      visibility: visible;
+    }
+  }
+
+	&__groups:hover {
+		visibility: visible;
+	}
+
+	&__links {
+	}
+
+	&__toggle {
+	}
+}

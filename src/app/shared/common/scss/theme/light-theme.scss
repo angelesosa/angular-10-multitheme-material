@@ -1,0 +1,26 @@
+//*
+//*
+//*
+// util
+@import '../../../core/scss/themes/theme-functions';
+// palettes
+@import './palettes/light-primary';
+@import './palettes/light-accent';
+@import './palettes/light-warn';
+
+
+// dark
+// $background-color: #30363c;
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$app-light-theme: mat-light-theme((
+  color: (
+    primary: $light-palette-primary,
+    accent: $light-palette-accent,
+    warn: $light-palette-warn,
+  )
+));
+
+// Change backgrpund card
+// $app-light-theme: map_merge_config_color_theme_material($app-light-theme, primary, text, white);

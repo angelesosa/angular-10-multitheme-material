@@ -1,0 +1,26 @@
+<div class="profilemenu">
+	<div class="profilemenu__img">
+		<ng-content select="[profilemenu__img]"></ng-content>
+	</div>
+	<div class="profilemenu__profile">
+		<ng-content select="[profilemenu__profile]"></ng-content>
+	</div>
+	<div class="profilemenu__name">
+		<ng-content select="[profilemenu__name]"></ng-content>
+	</div>
+	<div class="profilemenu__email">
+		<ng-content select="[profilemenu__email]"></ng-content>
+	</div>
+
+	<div class="profilemenu__header">
+		<ng-content select="[profilemenu__header]"></ng-content>
+	</div>
+	<mat-divider></mat-divider>
+	<div class="profilemenu__content">
+		<ng-content select="[profilemenu__content]"></ng-content>
+	</div>
+	<mat-divider></mat-divider>
+	<div class="profilemenu__footer">
+		<ng-content select="[profilemenu__footer]"></ng-content>
+	</div>
+</div>

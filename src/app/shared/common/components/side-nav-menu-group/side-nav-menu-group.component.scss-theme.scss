@@ -1,0 +1,30 @@
+@import '~@angular/material/theming';
+
+@mixin app-side-nav-menu-group-theme($theme) {
+	$foreground: map-get($theme, foreground);
+
+	app-side-nav-menu-group {
+
+    .sidenav__menugroup{
+
+      &__sumary {
+        font-size: 12px !important;
+        font-weight: 400 !important;
+        color: mat-color($foreground, secondary-text) !important;
+      }
+
+      &__icon {
+
+        &__favorite {
+          color: mat-color($foreground, secondary-text) !important;
+        }
+
+        &__favorite__pinned {
+          color: mat-color($foreground, secondary-text) !important;
+        }
+
+      }
+    }
+
+	}
+}

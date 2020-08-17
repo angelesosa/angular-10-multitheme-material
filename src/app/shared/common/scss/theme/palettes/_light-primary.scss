@@ -1,0 +1,39 @@
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+//*
+//*
+$light-palette-primary: mat-palette(
+	(
+		50: #e7f5ec,
+		100: #c4e6cf,
+		200: #9dd6af,
+		300: #76c68e,
+		400: #58b976,
+		500: #3bad5e,
+		600: #35a656,
+		700: #2d9c4c,
+		800: #269342,
+		900: #198331,
+		A100: #bbffc9,
+		A200: #88ffa0,
+		A400: #55ff77,
+		A700: #3bff63,
+		contrast: (
+			50: #000000,
+			100: #000000,
+			200: #000000,
+			300: #000000,
+			400: #000000,
+			500: #000000,
+			600: #ffffff,
+			700: #ffffff,
+			800: #ffffff,
+			900: #ffffff,
+			A100: #000000,
+			A200: #000000,
+			A400: #000000,
+			A700: #000000,
+		),
+	)
+);

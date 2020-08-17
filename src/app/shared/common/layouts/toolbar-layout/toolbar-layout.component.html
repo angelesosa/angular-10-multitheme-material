@@ -1,0 +1,25 @@
+<mat-toolbar>
+	<div class="toolbarlayout">
+		<div class="toolbarlayout__toogle">
+			<button
+				mat-icon-button
+				color="primary"
+				(click)="onclickSideNavToggle()"
+			>
+				<mat-icon>menu</mat-icon>
+			</button>
+		</div>
+		<div
+			class="toolbarlayout__logo"
+			[ngClass]="{ toolbarlayout__logo__vivible: !sideNavOpened }"
+		>
+			<ng-content select="[toolbarlayout__logo]"></ng-content>
+		</div>
+		<div class="toolbarlayout__left">
+			<ng-content select="[toolbarlayout__left]"></ng-content>
+		</div>
+		<div class="toolbarlayout__right">
+			<ng-content select="[toolbarlayout__right]"></ng-content>
+		</div>
+	</div>
+</mat-toolbar>

@@ -1,0 +1,56 @@
+<div class="container">
+	<div class="row animated fadeInUp">
+		<div class="col-12">
+			<form [formGroup]="form">
+				<mat-card>
+					<div class="row">
+						<div class="col-12">
+							<h3>
+								{{
+									pageType == "new" ? "Registrar " : "Actualizar "
+								}}
+								Country
+							</h3>
+						</div>
+
+						<div class="col-12">
+							<app-form-field-input appearance="outline" formControlName="name"
+							[type]="'text'" label="Name *" [error]="form.controls['name']"
+							>
+							</app-form-field-input>
+						</div>
+
+						<div class="col-12">
+							<app-form-field-input appearance="outline" formControlName="capital"
+							[type]="'text'" label="Capital" [error]="form.controls['capital']"
+							>
+							</app-form-field-input>
+						</div>
+
+						<div class="col-12">
+							<div class="d-flex buttons-submit">
+								<button
+									(click)="handleCancel()"
+									mat-stroked-button
+									color="warn"
+								>
+									CANCELAR
+								</button>
+								<button
+									(click)="handleSubmit()"
+									#submit
+									[disabled]="!form.valid"
+									mat-raised-button
+									color="primary"
+									>
+									{{ pageType == "new" ? "REGISTRAR" : "ACTUALIZAR" }}
+								</button>
+							</div>
+						</div>
+					</div>
+				</mat-card>
+			</form>
+
+		</div>
+	</div>
+</div>

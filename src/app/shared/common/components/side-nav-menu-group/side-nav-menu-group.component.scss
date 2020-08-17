@@ -1,0 +1,59 @@
+.sidenav__menugroup {
+  height: 70px !important;
+
+  &:hover {
+    .sidenav__menugroup__icon__favorite {
+      visibility: visible;
+    }
+  }
+
+  &__pinned {
+    order: -1;
+  }
+
+  &__title {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    line-height: 20px;
+    margin-bottom: 4px !important;
+  }
+
+  &__icon {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+
+    &__favorite {
+      height: 20px;
+      width: 20px;
+      font-size: 20px;
+      visibility: hidden;
+      transform: rotate(90deg);
+
+      &__pinned {
+        visibility: visible;
+        transform: rotate(0deg);
+      }
+    }
+
+    &__rotated {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__submenu {
+    overflow-y: hidden;
+    transition: transform 500ms ease;
+    transform: scaleY(0);
+    transform-origin: top;
+    display: none;
+
+    &__expanded {
+      transform: scaleY(1);
+      display: block;
+    }
+  }
+}
+
+.mat-list-base {
+  padding-top: 0px;
+}

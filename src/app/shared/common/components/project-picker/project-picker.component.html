@@ -1,0 +1,23 @@
+<div class="projectpicker" (click)="openMenu()">
+	<div class="projectpicker__button" [matMenuTriggerFor]="menuProject">
+		<mat-icon color="primary" svgIcon="chart-bubble"></mat-icon>
+		<span style="font-size: 16px; padding-left: 4px;">
+			{{ projectSelected.name }}
+		</span>
+		<mat-icon
+			class="projectpicker__icon"
+			[ngClass]="{ projectpicker__icon__openned: openned }"
+			>keyboard_arrow_down</mat-icon
+		>
+	</div>
+	<mat-menu #menuProject="matMenu" (closed)="menuClosed()">
+		<button
+			mat-menu-item
+			*ngFor="let project of projects"
+			(click)="onClickProject(project.projectid)"
+		>
+			<mat-icon svgIcon="chart-bubble"></mat-icon>
+			<span>{{ project.name }}</span>
+		</button>
+	</mat-menu>
+</div>

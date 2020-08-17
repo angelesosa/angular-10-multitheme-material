@@ -1,0 +1,28 @@
+<div
+	class="sidenav__menuitem"
+	matRipple
+	[matRippleUnbounded]="false"
+	routerLinkActive="sidenav__menuitem__active"
+>
+	<a
+		class="sidenav__menuitem__link"
+		[routerLink]="item.link"
+		[matTooltip]="item.label"
+		matTooltipPosition="right"
+		[matTooltipDisabled]="menuGroupListOpened"
+		matTooltipClass="sidenav__menuitem__tooltip"
+		[target]="extenalLink ? '_blank' : '_self'"
+	>
+		<mat-icon
+			class="sidenav__menuitem__link__icon"
+			routerLinkActive="sidenav__menuitem__link__active"
+			>{{ item.icon }}</mat-icon
+		>
+		<span
+			class="sidenav__menuitem__link__label"
+			routerLinkActive="sidenav__menuitem__link__active"
+			*ngIf="menuGroupListOpened"
+			>{{ item.label }}</span
+		>
+	</a>
+</div>

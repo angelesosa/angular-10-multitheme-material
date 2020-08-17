@@ -1,0 +1,45 @@
+@import "~@angular/material/theming";
+
+@mixin app-side-nav-menu-item-theme($theme) {
+  $primary: map-get($theme, primary);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  app-side-nav-menu-item {
+    .sidenav__menuitem {
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      min-height: 50px;
+
+      &:hover {
+        background: mat-color($background, "hover");
+      }
+
+      &__active {
+        background-color: mat-color($primary, 0.07) !important;
+      }
+
+      &__link {
+        display: flex;
+        align-items: center;
+        padding: 13px 24px;
+        text-decoration: none;
+
+        &__icon {
+          margin-right: 8px;
+          color: mat-color($foreground, secondary-text) !important;
+        }
+
+        &__label {
+          font-weight: 400 !important;
+          color: mat-color($foreground, secondary-text) !important;
+        }
+
+        &__active {
+          color: mat-color($primary) !important;
+        }
+      }
+    }
+  }
+}

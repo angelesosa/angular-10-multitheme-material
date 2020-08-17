@@ -1,1 +1,57 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+// settings
+@import './app/shared/core/scss/core';
+@import './app/shared/common/styles/forms';
+
+// carga unica del core de material
+@include mat-core();
+
+// cargando temas
+@import './app/shared/common/scss/theme/dark-theme.scss';
+@import './app/shared/common/scss/theme/light-theme.scss';
+@import './app/shared/common/scss/theme/classic-theme.scss';
+
+// componentes con temas
+@import './app/shared/common/components/side-nav-menu-group/side-nav-menu-group.component.scss-theme.scss';
+@import './app/shared/common/layouts/side-nav-item-layout/side-nav-item-layout.component.scss-theme.scss';
+@import './app/shared/common/components/logo/logo.component.scss-theme.scss';
+@import './app/shared/core/components/table/table-pagination/table-pagination.component.scss-theme.scss';
+@import './app/shared/common/components/side-nav-menu-item/side-nav-menu-item.component.scss-theme.scss';
+@import './app/shared/common/components/toolbar-profile-icon/toolbar-profile-icon.component.scss-theme.scss';
+@import './app/shared/common/layouts/toolbar-profile-menu-layout/toolbar-profile-menu-layout.component.scss-theme.scss';
+@import './app/shared/common/components/loading/loading.component.scss-theme.scss';
+
+// mixin para cargar los componentes con tema
+@mixin app-components-theme($theme) {
+	@include app-side-nav-menu-group-theme($theme);
+	@include app-logo-theme($theme);
+	@include app-side-nav-item-layout-theme($theme);
+	@include app-table-pagination-theme($theme);
+	@include app-side-nav-menu-item-theme($theme);
+	@include app-toolbar-profile-icon-theme($theme);
+	@include app-toolbar-profile-menu-layout-theme($theme);
+	@include app-loading-theme($theme);
+	// configurando mas componentes ...
+}
+
+// configurando tema principal
+@include angular-material-theme($app-dark-theme);
+@include app-components-theme($app-dark-theme);
+
+// configurando 2do tema
+.light-theme {
+	@include angular-material-color($app-light-theme);
+	@include app-components-theme($app-light-theme);
+}
+.classic-theme {
+  @include angular-material-color($app-classic-theme);
+  @include app-components-theme($app-classic-theme);
+}
+// configurando mas temas ...
+
 /* You can add global styles to this file, and also import other style files */
+html, body { min-height: 100vh; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

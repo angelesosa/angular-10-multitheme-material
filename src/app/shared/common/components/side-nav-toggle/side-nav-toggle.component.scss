@@ -1,0 +1,7 @@
+.menu-collpase {
+	transition: 300ms ease-in-out;
+	transform: rotate(0deg);
+}
+.menu-collpase.rotated {
+	transform: rotate(180deg);
+}

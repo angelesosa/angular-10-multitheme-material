@@ -1,0 +1,34 @@
+<mat-form-field [appearance]="appearance" [floatLabel]='floatLabel' [class]="error && error.invalid && (error.dirty || error.touched)  ? 'mat-form-field-invalid ng-invalid' : '' ">
+  <mat-label>{{label}}</mat-label>
+  <input matInput *ngIf="!mask"
+    [type]="type"
+    [placeholder]="placeholder"
+    (input)="onInput($event.target.value)"
+    [formControl]="value"
+    autocomplete="off"
+    [readonly]="isReadonly"
+    >
+    <!-- formControlName="controlName" -->
+    <input matInput *ngIf="mask"
+    [type]="type"
+    [placeholder]="placeholder"
+    (input)="onInput($event.target.value)"
+    [formControl]="value"
+    autocomplete="off"
+    [readonly]="isReadonly"
+
+    [mask]="mask"
+    [showMaskTyped]="showMaskTyped || false"
+    [suffix]="suffix || ''"
+    [prefix]="prefix || ''"
+    [dropSpecialCharacters]="dropSpecialCharacters"
+    >
+
+    <mat-icon *ngIf="icon && alignIcon == 'right'" (click)="setOnClick()" matSuffix>{{ icon }}</mat-icon>
+    <mat-icon *ngIf="icon && alignIcon == 'left'" (click)="setOnClick()" matPrefix>{{ icon }}</mat-icon>
+
+    <mat-hint style="color:red" *ngIf="error && error.invalid && (error.dirty || error.touched || error.pristine)">
+      {{ getMessage() }}
+    </mat-hint>
+
+  </mat-form-field>

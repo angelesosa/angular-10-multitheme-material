@@ -1,0 +1,20 @@
+@import "~@angular/material/theming";
+
+@mixin app-toolbar-profile-menu-layout-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+
+  app-toolbar-profile-menu-layout {
+    .profilemenu{
+      &__email {
+        color: mat-color($foreground, secondary-text) !important;
+      }
+
+      &__profile {
+        color: mat-color($primary) !important;
+      }
+
+    }
+  }
+}

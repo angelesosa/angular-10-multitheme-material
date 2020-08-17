@@ -1,0 +1,36 @@
+<!-- menu -->
+<mat-list-item
+	(click)="onclickMenu($event)"
+	class="sidenav__menugroup"
+	*ngIf="menuGroupListOpened"
+>
+	<div mat-line class="sidenav__menugroup__title">
+		{{ name }}
+	</div>
+	<mat-icon class="sidenav__menugroup__icon__favorite"
+	[ngClass]="{ sidenav__menugroup__icon__favorite__pinned: pinned }"
+	>
+		push_pin
+	</mat-icon>
+	<mat-icon
+		class="sidenav__menugroup__icon"
+		[ngClass]="{ sidenav__menugroup__icon__rotated: showSubmenu }"
+	>
+		expand_more
+	</mat-icon>
+	<div mat-line class="sidenav__menugroup__sumary" *ngIf="!showSubmenu">
+		{{ summary }}
+	</div>
+</mat-list-item>
+<!-- submenu -->
+<div
+	class="sidenav__menugroup__submenu"
+	[ngClass]="{ sidenav__menugroup__submenu__expanded: !menuGroupListOpened || showSubmenu }"
+>
+	<ng-container *ngFor="let item of items">
+		<app-side-nav-menu-item [item]="item" [menuGroupListOpened]="menuGroupListOpened">
+		</app-side-nav-menu-item>
+	</ng-container>
+</div>
+<mat-divider></mat-divider>
+<ng-container>{{ runChangeDetection() }}</ng-container>

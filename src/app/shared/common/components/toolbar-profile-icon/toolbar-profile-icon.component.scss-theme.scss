@@ -1,0 +1,58 @@
+@import "~@angular/material/theming";
+
+@mixin app-toolbar-profile-icon-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $primary: map-get($theme, primary);
+
+  app-toolbar-profile-icon {
+    .toolbarprofileicon {
+      &__miniimg {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: 32px 32px;
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        // color: mat-color($foreground, text);
+        // color: mat-color($primary);
+        color: white;
+        background-color: mat-color($primary);
+      }
+
+      &__imglarge {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: 32px 32px;
+        border-radius: 50%;
+        height: 80px;
+        width: 80px;
+        font-size: 32px;
+        background-color: mat-color($primary);
+      }
+
+      &__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 48px;
+        width: 48px;
+        cursor: pointer;
+        &:hover {
+          background-color: mat-color($background, focused-button);
+          border-radius: 50%;
+        }
+
+        &__large {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 88px;
+          width: 88px;
+        }
+      }
+    }
+  }
+}

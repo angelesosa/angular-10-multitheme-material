@@ -1,0 +1,34 @@
+<app-toolbar-profile-menu-layout>
+	<ng-container profilemenu__img>
+		<app-toolbar-profile-icon
+			[imgsrc]="imgsrc"
+			[firstname]="fullName"
+			[large]="true"
+		></app-toolbar-profile-icon>
+	</ng-container>
+	<ng-container profilemenu__name>
+		{{ fullName }}
+	</ng-container>
+	<ng-container profilemenu__email>
+		{{ email }}
+	</ng-container>
+	<ng-container profilemenu__profile>
+		{{ profile }}
+	</ng-container>
+	<ng-container profilemenu__header> </ng-container>
+	<ng-container profilemenu__content>
+		<button mat-menu-item disabled>
+			<mat-icon svgIcon="shield-account"></mat-icon>
+			<span>Mi cuenta</span>
+		</button>
+		<button mat-menu-item>
+			<mat-icon>lock</mat-icon>
+			<span>Cambiar contraseña</span>
+		</button>
+		<button mat-menu-item>
+			<mat-icon>exit_to_app</mat-icon>
+			<span>Cerrar session en todas las cuentas</span>
+		</button>
+	</ng-container>
+	<ng-container profilemenu__footer></ng-container>
+</app-toolbar-profile-menu-layout>

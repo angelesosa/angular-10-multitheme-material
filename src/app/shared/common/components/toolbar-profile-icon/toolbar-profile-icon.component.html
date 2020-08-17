@@ -1,0 +1,26 @@
+<div
+	class="toolbarprofileicon__container"
+	[ngClass]="{
+		toolbarprofileicon__container__large: large
+	}"
+>
+	<img
+		*ngIf="imgsrc; else elseText"
+		class="toolbarprofileicon__miniimg"
+		[src]="imgsrc"
+		[ngClass]="{
+			toolbarprofileicon__imglarge: large
+		}"
+		alt=""
+	/>
+	<ng-template #elseText>
+		<span
+			class="toolbarprofileicon__miniimg"
+			[ngClass]="{
+				toolbarprofileicon__imglarge: large
+			}"
+		>
+			{{ firstname }}
+		</span>
+	</ng-template>
+</div>

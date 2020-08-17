@@ -1,0 +1,13 @@
+//*
+//*
+//*
+// funcion para cambiar el valor de una variable dentro del config color del tema generado por material
+@function map_merge_config_color_theme_material($theme,  $strNamespace,  $strVar,  $newValue) {
+  // @debug "|==> map_namespace: #{ $map_namespace }";
+  $config_color: map-get($theme, color);
+  $map_namespace: map-get($config_color, $strNamespace);
+  $map_namespace: map_merge($map_namespace, ($strVar: $newValue));
+  $config_color: map_merge($config_color, ($strNamespace: $map_namespace));
+  $theme: map_merge($theme, ( color: $config_color));
+  @return $theme;
+}

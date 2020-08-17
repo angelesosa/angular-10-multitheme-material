@@ -1,0 +1,16 @@
+
+<mat-form-field [appearance]="appearance" [class]="error && error.invalid && (error.dirty || error.touched)  ? 'mat-form-field-invalid ng-invalid' : '' ">
+  <mat-label>{{label}}</mat-label>
+  <textarea matInput
+  [placeholder]="placeholder"
+  (input)="onInput($event.target.value)"
+  [formControl]="value"
+  [readonly]="isReadonly"
+  >
+  </textarea>
+
+  <mat-hint style="color:red" *ngIf="error && error.invalid && (error.dirty || error.touched)">
+    {{ getMessage() }}
+  </mat-hint>
+
+</mat-form-field>

@@ -1,0 +1,12 @@
+<mat-toolbar>
+	<button mat-icon-button color="primary" (click)="onClickMenuToggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<a
+		mat-icon-button
+		class="toolbar__logo"
+		[ngClass]="{ toolbar__logo__vivible: !sideNavOpened }"
+	>
+		<app-logo></app-logo>
+	</a>
+</mat-toolbar>

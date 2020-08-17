@@ -1,0 +1,9 @@
+.toolbar {
+  &__logo {
+    visibility: hidden;
+    transition: visibility 0.5ms;
+    &__vivible {
+      visibility: visible;
+    }
+  }
+}

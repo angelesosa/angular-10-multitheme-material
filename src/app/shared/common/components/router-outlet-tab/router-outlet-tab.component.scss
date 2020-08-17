@@ -1,0 +1,15 @@
+.routertab {
+  &__link {
+    font-size: 16px !important;
+  }
+
+  &__active {
+    opacity: 1 !important;
+  }
+}
+
+.mat-ink-bar {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 4px !important;
+}

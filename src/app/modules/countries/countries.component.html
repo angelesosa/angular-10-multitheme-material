@@ -1,0 +1,23 @@
+<app-title title="Countries"></app-title>
+
+<mat-card>
+	<app-table-pagination
+		[tableId]="etc.dataTable.tableId"
+		[columns]="etc.dataTable.columns"
+		[pageSizeOptions]="etc.dataTable.pageSizeOptions"
+		[pageSize]="etc.dataTable.pageSizeDefault"
+		[actions]="etc.dataTable.actionColumn"
+		[index]="etc.dataTable.indexColumn"
+		[listStatus]="etc.dataTable.listStatus"
+		[statusSelected]="etc.dataTable.statusSelected"
+		[showStatus]="etc.dataTable.showStatus"
+		[filters]="etc.dataTable.filtersAllowed"
+		[filterSelected]="etc.dataTable.filterSelected"
+		[showFilters]="etc.dataTable.showFilters"
+		[showBtnDownload]="etc.dataTable.showBtnDownload"
+		[showBtnAdd]="etc.dataTable.showBtnAdd"
+		(clicBtn)="handleAction($event)"
+		(runFilter)="handleFilter($event)"
+		(newRegister)="handleNew($event)"
+	></app-table-pagination>
+</mat-card>

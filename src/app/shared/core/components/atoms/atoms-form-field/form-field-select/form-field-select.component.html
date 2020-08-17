@@ -1,0 +1,15 @@
+<mat-form-field [appearance]="appearance" [class]="error && error.invalid && (error.dirty || error.touched)  ? 'mat-form-field-invalid ng-invalid' : '' ">
+  <mat-label>{{label}}</mat-label>
+
+  <mat-select (selectionChange)='onSelect($event)' [formControl]="value" [disabled]="isDisabled">
+    <mat-option disabled value="">Seleccionar</mat-option>
+    <mat-option *ngFor="let option of options" [value]="option[key]" >{{ option[display] }}</mat-option>
+  </mat-select>
+
+  <mat-icon *ngIf="icon" matPrefix>{{ icon }}</mat-icon>
+
+  <mat-hint style="color:red" *ngIf="error && error.invalid && (error.dirty || error.touched || error.pristine)">
+    {{ getMessage() }}
+  </mat-hint>
+
+</mat-form-field>

@@ -1,0 +1,15 @@
+.main__layout {
+	height: 100vh;
+
+	&__sidenav {
+
+	}
+
+	&__toolbar {
+
+	}
+
+	&__content {
+    transition: margin 0.2s;
+	}
+}

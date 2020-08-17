@@ -1,0 +1,16 @@
+<!-- configuracion del layout principal mas no el contenido -->
+<!-- Para esta configuracion del layout principal se esta utilizando el sidenav angular material -->
+<mat-sidenav-container class="main__layout" autosize>
+	<mat-sidenav
+		class="main__layout__sidenav"
+		#sidenav
+		[mode]="mobileQuery.matches ? 'over' : 'side'"
+		[fixedInViewport]="mobileQuery.matches"
+		opened="true"
+	>
+		<ng-content select="[main__layout__sidenav]"></ng-content>
+	</mat-sidenav>
+	<mat-sidenav-content class="main__layout__content">
+		<ng-content select="[main__layout__content]"></ng-content>
+	</mat-sidenav-content>
+</mat-sidenav-container>

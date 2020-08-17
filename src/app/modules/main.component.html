@@ -1,0 +1,134 @@
+<app-main-layout
+	#mainLayout
+	(sideNavOpenedChange)="sideNavOpenedChange($event)"
+>
+	<!-- sidenav -->
+	<ng-container main__layout__sidenav>
+		<!-- custom side nav structure -->
+		<app-side-nav-layout
+			#sideNav
+			(sideNavExpanded)="menuGroupListOpenedChange($event)"
+		>
+			<!-- logo -->
+			<ng-container sidenav__logo>
+				<mat-toolbar class="">
+					<a mat-icon-button>
+						<app-logo></app-logo>
+					</a>
+					<span
+						class="sidenav__logo__name"
+						name
+						*ngIf="menuGroupListOpened"
+					>
+						Multi-Theme
+					</span>
+				</mat-toolbar>
+				<mat-divider></mat-divider>
+			</ng-container>
+
+			<!-- groups -->
+			<mat-nav-list sidenav__groups__items>
+				<app-side-nav-menu-group-list
+					[menuGroupListOpened]="menuGroupListOpened"
+					[menuGroups]="menuGroups"
+				></app-side-nav-menu-group-list>
+			</mat-nav-list>
+
+			<!-- links -->
+			<ng-container sidenav__links__items>
+				<mat-divider></mat-divider>
+				<app-side-nav-menu-item
+					[item]="{
+						icon: 'extension',
+						link: '/homeasdascvbdf',
+						label: 'Extensiones'
+					}"
+					[extenalLink]="true"
+					[menuGroupListOpened]="menuGroupListOpened"
+				>
+				</app-side-nav-menu-item>
+				<mat-divider></mat-divider>
+				<app-side-nav-menu-item
+					[item]="{
+						icon: 'mobile_friendly',
+						link: '/homeasdascvbdf',
+						label: 'Descarga la app'
+					}"
+					[extenalLink]="true"
+					[menuGroupListOpened]="menuGroupListOpened"
+				>
+				</app-side-nav-menu-item>
+				<mat-divider></mat-divider>
+			</ng-container>
+
+			<!-- menu sidenav toogle -->
+			<ng-container sidenav__toggle>
+				<app-side-nav-toggle
+					[menuGroupListOpened]="menuGroupListOpened"
+				></app-side-nav-toggle>
+			</ng-container>
+		</app-side-nav-layout>
+	</ng-container>
+
+	<!-- content -->
+	<ng-container main__layout__content>
+		<!-- custom content structure -->
+		<app-content-layout>
+			<!-- toolbar -->
+			<ng-container content__layout__toolbar>
+				<app-toolbar-layout
+					[sideNavOpened]="sideNavOpened"
+					(clickSideNavToggle)="mainLayout.toogleSideNav()"
+				>
+					<ng-container toolbarlayout__logo>
+						<a mat-icon-button>
+							<app-logo></app-logo>
+						</a>
+					</ng-container>
+					<ng-container toolbarlayout__left>
+						<app-project-picker
+							[projects]="[
+								{ projectid: 'billions', name: 'MNM Billlions' },
+								{ projectid: 'exx', name: 'Exxi Capital' }
+							]"
+							[default]="'billions'"
+							(onChangeProjectSelected)="onChangeProjectSelected($event)"
+						></app-project-picker>
+					</ng-container>
+					<ng-container toolbarlayout__right>
+						<button mat-icon-button>
+							<mat-icon>notifications</mat-icon>
+						</button>
+						<button mat-icon-button>
+							<mat-icon>more_vert</mat-icon>
+						</button>
+						<app-toolbar-profile-icon
+							[matMenuTriggerFor]="menu"
+							[imgsrc]="
+								'https://lh3.googleusercontent.com/a-/AAuE7mC1ynuYeyZHQOHytPjPQy5gOpJ1d7UzhqAPmlFfuA'
+							"
+							[firstname]="'Angel'"
+						></app-toolbar-profile-icon>
+						<mat-menu #menu="matMenu">
+							<app-toolbar-profile-menu
+								[imgsrc]="
+									'https://lh3.googleusercontent.com/a-/AAuE7mC1ynuYeyZHQOHytPjPQy5gOpJ1d7UzhqAPmlFfuA'
+								"
+								[fullName]="'Angel E. Sosa Ramos'"
+								[email]="'as.sosramos@gmail.com'"
+								[profile]="'Administrador'"
+							>
+							</app-toolbar-profile-menu>
+						</mat-menu>
+					</ng-container>
+				</app-toolbar-layout>
+			</ng-container>
+
+			<!-- content -->
+			<ng-container content__layout__content>
+				<!-- <app-router-main-content></app-router-main-content> -->
+				<app-router-outlet-main></app-router-outlet-main>
+			</ng-container>
+		</app-content-layout>
+	</ng-container>
+</app-main-layout>

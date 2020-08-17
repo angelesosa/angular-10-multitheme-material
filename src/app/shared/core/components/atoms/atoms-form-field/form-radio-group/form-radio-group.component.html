@@ -1,0 +1,9 @@
+<div class="radio-container">
+  <label id="radio" class="radio-label">{{ label }}</label>
+  <mat-radio-group aria-labelledby="radio" [ngClass]="[directionClassName]" (change)="onChecked($event.value)" [formControl]="value">
+    <mat-radio-button color="primary" class="radio-group-item"  *ngFor="let option of options" [value]="option[key]">
+      {{ option[display] }}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+

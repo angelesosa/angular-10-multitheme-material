@@ -1,0 +1,27 @@
+//*
+//*
+//*
+// util
+@import '../../../core/scss/themes/theme-functions';
+// palettes
+@import './palettes/dark-primary';
+@import './palettes/dark-accent';
+@import './palettes/dark-warn';
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$app-dark-theme: mat-dark-theme((
+  color: (
+    primary: $dark-palette-primary,
+    accent: $dark-palette-accent,
+    warn: $dark-palette-warn,
+  )
+));
+
+// custom color
+$app-dark-theme: map_merge_config_color_theme_material($app-dark-theme, background, background, #353C42);
+$app-dark-theme: map_merge_config_color_theme_material($app-dark-theme, background, card, #30363c);
+$app-dark-theme: map_merge_config_color_theme_material($app-dark-theme, background, app-bar, #272C30);
+$app-dark-theme: map_merge_config_color_theme_material($app-dark-theme, background, dialog, #272C30);
+
+  // @debug "|==> map_namespace: #{ $app-dark-theme }";

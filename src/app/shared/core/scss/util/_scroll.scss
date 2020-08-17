@@ -1,0 +1,37 @@
+::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: transparent;
+	border-radius: 3px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+	border-radius: 3px;
+	// transition: background 0.5s;
+}
+
+/* Handle on hover */
+// ::-webkit-scrollbar-thumb:hover {
+// 	background: #555;
+// }
+
+/* Ripple effect */
+.ripple {
+	background-position: center;
+	transition: background 0.8s;
+}
+.ripple:hover {
+	background: inherit radial-gradient(circle, transparent 1%, #47a7f5 1%)
+		center/15000%;
+}
+.ripple:active {
+	background-color: inherit;
+	background-size: 100%;
+	transition: background 0s;
+}

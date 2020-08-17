@@ -1,0 +1,17 @@
+.projectpicker {
+  cursor: pointer;
+
+  &__button {
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+
+    &__openned {
+      transform: rotate(180deg);
+    }
+  }
+}
