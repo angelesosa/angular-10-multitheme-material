@@ -3,7 +3,7 @@ import { LoadingOverlayService } from '@common/components/loading-overlay/loadin
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
-import { environment } from 'src/environments/environment';
+import { environment } from 'environments/environment';
 import { LocalStorageService } from '@core/services/local-storage.service';
 
 interface FilterAllow {
