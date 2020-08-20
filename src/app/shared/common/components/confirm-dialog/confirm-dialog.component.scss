@@ -1,0 +1,30 @@
+.confirm-dialog {
+  text-align: center;
+}
+
+.margin-end {
+  margin-bottom: 4px !important;
+}
+
+.buttons-logout {
+  margin-bottom: 0.2em;
+  margin-top: 1em;
+  @media screen and (max-width: 780px) {
+    justify-content: center;
+  }
+}
+
+.btn-logout {
+  color: #fff;
+  margin-bottom: .5rem;
+  // font-weight: bold;
+}
+
+.btn-agree
+{
+  color: #fff !important;
+}
+
+.btn-disagree {
+  border-color: #eb5757;
+}

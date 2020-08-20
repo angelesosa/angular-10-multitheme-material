@@ -80,7 +80,7 @@ export class SideNavMenuGroupComponent implements OnInit {
 
   runChangeDetection() {
     if (!this.showChanges) return '';
-    console.log('SideNavMenuComponent - Checking the view', this.menuid);
+    console.info('SideNavMenuComponent - Checking the view', this.menuid);
   }
 
   addMenuLocalStorage() {

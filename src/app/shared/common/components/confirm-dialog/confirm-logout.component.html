@@ -1,0 +1,9 @@
+<h1 matDialogTitle cdkFocusRegionstart>{{title}}</h1>
+<div mat-dialog-content>{{confirmMessage}}</div>
+<div mat-dialog-actions class="buttons-logout">
+    <button *ngIf="(aliveSessions == 1)" mat-raised-button color="primary" class="btn-logout" (click)="dialogRef.close('logout')">CERRAR SESIÓN</button>
+    <button *ngIf="(aliveSessions > 1)" mat-raised-button  color="accent" class="btn-logout fix-btn" (click)="dialogRef.close('logoutAll')">CERRAR TODAS LAS SESIONES</button>
+    <button *ngIf="(aliveSessions > 1)" mat-raised-button  color="primary" class="btn-logout"(click)="dialogRef.close('logout')">CERRAR SESIÓN</button>
+    <!-- <button mat-raised-button color="primary" class="btn-logout" (click)="dialogRef.close('logoutAll')">CERRAR SESIÓN</button> -->
+    <button mat-raised-button color="warn" class="btn-logout" (click)="dialogRef.close('cancel')">CANCELAR</button>
+</div>

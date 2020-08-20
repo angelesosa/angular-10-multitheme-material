@@ -7,6 +7,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
 import { LoadingOverlayComponent } from './components/loading-overlay/loading-overlay.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ToastrModule } from 'ngx-toastr';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { ConfirmLogoutComponent } from './components/confirm-dialog/confirm-logout.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 // const routerChildren: Routes = [];
 @NgModule({
   declarations: [
@@ -15,8 +21,26 @@ import { LoadingComponent } from './components/loading/loading.component';
     RouterOutletTabComponent,
     LoadingComponent,
     LoadingOverlayComponent,
+    ConfirmDialogComponent,
+    ConfirmLogoutComponent
   ],
-  imports: [CommonModule, RouterModule, MatTabsModule],
+  entryComponents: [
+    ConfirmDialogComponent,
+    ConfirmLogoutComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MatTabsModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatDividerModule,
+    ToastrModule.forRoot({
+      maxOpened: 1,
+      autoDismiss: true,
+      preventDuplicates: true,
+    }),
+  ],
   exports: [TitleComponent, LogoComponent, RouterOutletTabComponent],
 })
 export class LocalCommonModule {}

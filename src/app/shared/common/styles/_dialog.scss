@@ -1,0 +1,19 @@
+.app-dialog {
+  & .mat-dialog-content {
+    margin: 0px;
+    padding: 0px 16px;
+  }
+
+  & .mat-dialog-container {
+    padding: 10px;
+  }
+
+  & .mat-dialog-title {
+    margin: 0px 15px 16px;
+  }
+
+  & .mat-dialog-actions {
+    margin: 0 15px;
+  }
+
+}

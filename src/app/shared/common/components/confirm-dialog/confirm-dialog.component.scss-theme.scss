@@ -1,0 +1,15 @@
+@import "~@angular/material/theming";
+
+@mixin app-confirm-dialog-theme($theme) {
+
+	$warn: map-get($theme, warn);
+
+  app-confirm-dialog {
+
+    .btn-disagree {
+      border-color:mat-color($warn);
+    }
+
+  }
+
+}

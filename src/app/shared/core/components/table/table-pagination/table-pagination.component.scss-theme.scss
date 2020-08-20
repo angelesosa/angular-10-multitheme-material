@@ -1,51 +1,50 @@
 @import "~@angular/material/theming";
 
 @mixin app-table-pagination-theme($theme) {
-
   $config_color: map-get($theme, color);
   $background: map-get($config_color, background);
   $foreground: map-get($config_color, foreground);
 
   // @debug "|==> map_background: #{ $theme }";
+  app-table-pagination {
+    tr.mat-row {
+      height: 32px !important;
+      &:hover {
+        background-color: mat-color($background, "hover") !important;
+      }
 
-  tr.mat-row {
-    height: 32px !important;
-    &:hover {
-      background-color: mat-color($background, 'hover') !important;
+      & td.mat-cell button.mat-icon-button {
+        height: 36px !important;
+        line-height: 25px !important;
+      }
     }
 
-    & td.mat-cell button.mat-icon-button {
-      height: 36px !important;
-      line-height: 25px !important;
+    tr.mat-row:nth-child(odd) {
+      background-color: mat-color($background, "background");
+    }
+
+    tr.mat-header-row {
+      height: 48px !important;
+      background-color: mat-color($background, "app-bar");
+      border-bottom: 0.3px solid #37d668 !important;
+    }
+
+    .table__footer {
+      background-color: mat-color($background, "app-bar");
+    }
+
+    .mat-paginator {
+      background-color: mat-color($background, "app-bar");
+    }
+
+    th.mat-header-cell {
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    select option {
+      background: mat-color($background, "card");
+      color: mat-color($foreground, text) !important;
     }
   }
-
-  tr.mat-row:nth-child(odd) {
-    background-color: mat-color($background, 'background');
-  }
-
-  tr.mat-header-row {
-    height: 48px !important;
-    background-color: mat-color($background, 'app-bar');
-    border-bottom: 0.3px solid #37d668 !important;
-  }
-
-  .table__footer {
-    background-color: mat-color($background, 'app-bar');
-  }
-
-  .mat-paginator {
-    background-color: mat-color($background, 'app-bar');
-  }
-
-  th.mat-header-cell {
-    font-size: 13px ;
-    text-transform: uppercase;
-  }
-
-  select option {
-    background: mat-color($background, 'card');
-    color: mat-color($foreground, text) !important;
-  }
-
 }

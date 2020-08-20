@@ -100,7 +100,6 @@ export class TableMultifilterComponent implements OnInit {
   }
 
   exportToCsv(): void {
-    console.log(this.columns)
     const data = this.dataSource.filteredData.map(item => {
       let newItem = {};
       this.columns.map(row => {

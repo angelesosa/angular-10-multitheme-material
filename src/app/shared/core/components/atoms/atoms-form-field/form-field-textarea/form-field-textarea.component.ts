@@ -20,6 +20,7 @@ export class FormFieldTextareaComponent implements OnInit {
   @Input() appearance: string;
   @Input() label: string;
   @Input() placeholder: string;
+  @Input() rows: number = 1;
 
   @Input() isReadonly: boolean = false;
 

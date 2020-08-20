@@ -67,7 +67,7 @@ export class TablePaginationComponent implements OnInit {
     return this.displayedColumns;
   }
 
-  chargeDataTable(rows: []): void {
+  chargeDataTable(rows: any[]): void {
     this.dataSource = new MatTableDataSource<any>(rows);
     this.dataSource.paginator = this.paginator;
   }
@@ -83,7 +83,7 @@ export class TablePaginationComponent implements OnInit {
 
   handleFilterKey(event: string): void {
     this.filterSelected = event;
-    this.handleRefresh();
+    // this.handleRefresh();
   }
 
   handleFilterValue(event: string): void {
@@ -100,7 +100,6 @@ export class TablePaginationComponent implements OnInit {
   }
 
   exportToCsv(): void {
-    console.log(this.columns)
     const data = this.dataSource.filteredData.map(item => {
       let newItem = {};
       this.columns.map(row => {
@@ -108,7 +107,7 @@ export class TablePaginationComponent implements OnInit {
       });
       return newItem;
     });
-    this.eCvsSvc.exportCsv('cursos', data);
+    this.eCvsSvc.exportCsv(`${this.tableId}`, data);
   }
 
   chooseColumns(event): void {

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { LoadingOverlayService } from '@common/components/loading-overlay/loading-overlay.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
 import { LocalStorageService } from '@core/services/local-storage.service';
+import { ToasterService } from '@core/services/toaster.service';
 
 interface FilterAllow {
   key: string;
@@ -17,14 +18,14 @@ interface IHttpResponse<T> {
   messageId: string;
   kindMessage?: string;
   data: {
-    hasFilter?: boolean,
-    hasPaging?: boolean,
-    itemsCounter?: number,
+    hasFilter?: boolean;
+    hasPaging?: boolean;
+    itemsCounter?: number;
     item?: T;
     items?: T[];
   };
   applied: {};
-  filtersAllowed?: FilterAllow[],
+  filtersAllowed?: FilterAllow[];
   timeLapse: {
     started: string;
     ended: string;
@@ -39,7 +40,8 @@ export class HttpClientService {
   constructor(
     private httpClient: HttpClient,
     private loadingOverlay: LoadingOverlayService,
-    private lsSvc: LocalStorageService
+    private lsSvc: LocalStorageService,
+    private toastSvc: ToasterService
   ) {}
 
   get<T>({
@@ -51,6 +53,7 @@ export class HttpClientService {
     addApiKey = false,
     addContentTypeJson = true,
     loadingOverlay = false,
+    showErrToastMsg = true,
   }): Observable<IHttpResponse<T>> {
     // url
     const url = this.buildUrl({ nameAPI, urlOrPath });
@@ -75,6 +78,11 @@ export class HttpClientService {
         map((result) => {
           loadingOverlay && this.loadingOverlay.hide();
           return result;
+        }),
+        catchError((httpError) => {
+          loadingOverlay && this.loadingOverlay.hide();
+          showErrToastMsg && this.toastSvc.error({ message: this.getErrorMsg(httpError) });
+          return throwError(httpError.error);
         })
       );
   }
@@ -83,12 +91,13 @@ export class HttpClientService {
     nameAPI = '',
     urlOrPath = '',
     headers = [],
-    body = '',
+    body,
     jsonParse = true,
     addCredentials = false,
     addApiKey = false,
     addContentTypeJson = true,
     loadingOverlay = false,
+    showErrToastMsg = true,
   }): Observable<IHttpResponse<T>> {
     // url
     const url = this.buildUrl({ nameAPI, urlOrPath });
@@ -112,6 +121,12 @@ export class HttpClientService {
         map((result) => {
           loadingOverlay && this.loadingOverlay.hide();
           return result;
+        }),
+        catchError((httpError) => {
+          console.error(httpError);
+          loadingOverlay && this.loadingOverlay.hide();
+          showErrToastMsg && this.toastSvc.error({ message: this.getErrorMsg(httpError) });
+          return throwError(httpError.error);
         })
       );
   }
@@ -120,12 +135,13 @@ export class HttpClientService {
     nameAPI = '',
     urlOrPath = '',
     headers = [],
-    body = '',
+    body,
     jsonParse = true,
     addCredentials = false,
     addApiKey = false,
     addContentTypeJson = true,
     loadingOverlay = false,
+    showErrToastMsg = true,
   }): Observable<IHttpResponse<T>> {
     // url
     const url = this.buildUrl({ nameAPI, urlOrPath });
@@ -149,6 +165,11 @@ export class HttpClientService {
         map((result) => {
           loadingOverlay && this.loadingOverlay.hide();
           return result;
+        }),
+        catchError((httpError) => {
+          loadingOverlay && this.loadingOverlay.hide();
+          showErrToastMsg && this.toastSvc.error({ message: this.getErrorMsg(httpError) });
+          return throwError(httpError.error);
         })
       );
   }
@@ -195,5 +216,9 @@ export class HttpClientService {
   private getApiKey() {
     const apiKey = environment['GENERAL_API_KEY'];
     return [{ key: 'api_key', val: apiKey || '' }];
+  }
+
+  private getErrorMsg(httpError) {
+    return `La solicitud no se procesó, inténtalo de nuevo [${httpError.status}]`;
   }
 }

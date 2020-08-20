@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
-interface ToastConfig {
+interface ToasterConfig {
   title?: string;
   message: string;
   timeLapse?: string;
-  type?: 'success' | 'error' | 'warning' | 'info';
   duration?: number;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToasterService {
-
-  constructor(
-    private _toast: ToastrService
-  ) { }
+  constructor(private _toast: ToastrService) {}
 
   /**
    *
@@ -26,24 +22,35 @@ export class ToasterService {
    * @param type Tipo de toast
    * @param duration Duracion en segundos
    */
-  public show(config: ToastConfig) {
-    let duration;
+  public success(config: ToasterConfig) {
+    this.show('success', config);
+  }
+
+  public warning(config: ToasterConfig) {
+    this.show('warning', config);
+  }
+
+  public info(config: ToasterConfig) {
+    this.show('info', config);
+  }
+
+  public error(config: ToasterConfig) {
+    this.show('error', config);
+  }
+
+  private show(type, config: ToasterConfig) {
+    let duration = config.duration ? config.duration * 1000 : 4000;
     const title = config.title || '';
-    const type = config.type || 'success';
-    if (!config.duration) {
-      duration = (type == 'success' || type == 'info') ? 4000 : 5000
-    } else {
-      duration = duration * 1000;
-    }
     this._toast[type](config.message, title, {
       timeOut: duration,
       progressBar: true,
       enableHtml: true,
       progressAnimation: 'increasing',
+      autoDismiss: true,
       closeButton: false,
       tapToDismiss: true,
       extendedTimeOut: 20000,
-      positionClass: 'toast-bottom-full-width'
-    })
+      positionClass: 'toast-bottom-right',
+    });
   }
 }
