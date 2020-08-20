@@ -13,7 +13,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "dev": "ng serve --aot --host 0.0.0.0 --port 4800"
+    "dev": "ng serve --aot --host 0.0.0.0 --port 4401"
   },
   "private": true,
   "dependencies": {

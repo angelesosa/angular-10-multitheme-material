@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LocalCommonModule } from '@common/local-common.module';
+import { MultiFilterModule } from '@core/components/table/multi-filter/multi-filter.module';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     LocalCommonModule,
+    MultiFilterModule,
   ],
 })
 export class HomeModule {}
