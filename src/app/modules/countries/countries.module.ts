@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { CountriesRoutingModule } from './countries-routing.module';
 import { CountriesComponent } from './countries.component';
+import { CountryWriteComponent } from './country-write/country-write.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { TablePaginationModule } from '@core/components/table/table-pagination/table-pagination.module';
 import { LocalCommonModule } from '@common/local-common.module';
-import { CountryWriteComponent } from './country-write/country-write.component';
 import { AtomsFormFieldModule } from '../../shared/core/components/atoms/atoms-form-field/atoms-form-field.module';
 
 

@@ -16,6 +16,7 @@ export class MainComponent implements OnInit {
       items: [
         { icon: 'home', link: '/home', label: 'Home' },
         { icon: 'person_pin_circle', link: '/countries', label: 'Countries' },
+        { icon: 'memory', link: '/products', label: 'Products' },
         { icon: 'highlight_alt', link: '/tabexample', label: 'Tabs Example' },
       ],
     },

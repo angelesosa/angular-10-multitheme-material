@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent, MatAutocomplete } from '@angular/material/autocomplete';
@@ -11,23 +11,26 @@ import { etc } from "./multi-filter.etc";
 @Component({
   selector: 'app-multi-filter',
   templateUrl: './multi-filter.component.html',
-  styleUrls: ['./multi-filter.component.scss']
+  styleUrls: ['./multi-filter.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiFilterComponent implements OnInit {
 
-  visible = true;
+  @Input() allFilters: IFilter[] = [];
+
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER];
   filterCtrl = new FormControl();
   $filtered: Observable<IFilter[]>;
   filters: IFilter[] = [];
-  allFilters: IFilter[] = etc.allFilters;
   filteredList: IFilter[] = [];
 
   filterKeySelected = '';
   hasOptionsSelected = false;
-  reglas = '';
+  hint = '';
+
+  @Output() runFilter = new EventEmitter();
 
   @ViewChild('filterInput') filterInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
@@ -37,7 +40,7 @@ export class MultiFilterComponent implements OnInit {
         startWith(null),
         map((search: string | null) => {
           if(search && search.includes(':')) {
-            this.filteredList = this._filterOptions(search.split(':')[0]).filter(filter => filter.name.toLowerCase().indexOf(search.toLowerCase()) === 0);
+            this.filteredList = this._filterOptions(search.split(':')[0]).filter(filter => filter.label.toLowerCase().indexOf(search.toLowerCase()) === 0);
             return this.filteredList;
           }
           return search ? this._filter(search) : this.allFilters.slice();
@@ -64,6 +67,7 @@ export class MultiFilterComponent implements OnInit {
     if (index >= 0) {
       this.filters.splice(index, 1);
     }
+    this.handleGenerateFilter();
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
@@ -74,21 +78,20 @@ export class MultiFilterComponent implements OnInit {
   private _filter(value: string): IFilter[] {
     const filterValue = value.toLowerCase();
     this.filterKeySelected = '';
-    this.hasOptionsSelected = false;
-    this.reglas = '';
-    return this.allFilters.filter(filter => filter.name.toLowerCase().indexOf(filterValue) === 0);
+    this.hint = '';
+    return this.allFilters.filter(filter => filter.label.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterOptions(value: string): IFilter[] {
-    let filterSelected = this.allFilters.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+    let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
     if (!filterSelected) return[];
-    this.filterKeySelected = filterSelected.id;
+    this.filterKeySelected = filterSelected.key;
     this.hasOptionsSelected = filterSelected.hasOption;
-    this.reglas = filterSelected.reglas;
+    this.hint = filterSelected.hint;
     return filterSelected.options && filterSelected.options.map( filterOption => {
-      let filter: IFilter = { id: '', name: '' };
-      filter.id = `${filterSelected.id}/${filterOption.id}`;
-      filter.name =  `${filterSelected.name}:${filterOption.name}`;
+      let filter: IFilter = { key: '', label: '' };
+      filter.key = `${filterSelected.key}/${filterOption.key}`;
+      filter.label =  `${filterSelected.label}:${filterOption.label}`;
       return filter;
     }) || [];
   }
@@ -97,15 +100,16 @@ export class MultiFilterComponent implements OnInit {
 
   addFilter( value: string ): void {
     if ( value.includes(':') ) {
-      let filterSelected = this.filteredList.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+      let filterSelected = this.filteredList.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
       this.hasOptionsSelected && filterSelected && this.filters.push( filterSelected );
       !this.hasOptionsSelected && this.filters.push( this.generateFilter(value) );
       this.filterInput.nativeElement.value = '';
       this.filterCtrl.setValue(null);
-      this.reglas = '';
+      this.hint = '';
+      this.handleGenerateFilter();
       // this.filterInput.nativeElement.blur();
     } else {
-      let filterSelected = this.allFilters.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+      let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
       if (!filterSelected) return;
       this.filterInput.nativeElement.value = `${value}:`;
       this.filterCtrl.setValue(`${value}:`);
@@ -114,9 +118,19 @@ export class MultiFilterComponent implements OnInit {
 
   generateFilter( value: string ): IFilter {
     return {
-      id: `${this.filterKeySelected}/${value.split(':')[1]}`,
-      name: value,
+      key: `${this.filterKeySelected}/${value.split(':')[1]}`,
+      label: value,
     };
+  }
+
+  handleGenerateFilter() {
+    const filters = this.filters.map( item => {
+      return {
+        key: item.key.split('/')[0],
+        val: item.key.split('/')[1]
+      };
+    });
+    this.runFilter.emit( filters );
   }
 
 }

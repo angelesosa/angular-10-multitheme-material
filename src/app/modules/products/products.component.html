@@ -1,0 +1,19 @@
+<app-title title="Productos"></app-title>
+
+<mat-card>
+	<app-table-multifilter
+		[tableId]="etc.dataTable.tableId"
+		[columns]="etc.dataTable.columns"
+		[pageSizeOptions]="etc.dataTable.pageSizeOptions"
+		[pageSize]="etc.dataTable.pageSizeDefault"
+		[actions]="etc.dataTable.actionColumn"
+		[index]="etc.dataTable.indexColumn"
+		[filters]="etc.dataTable.filtersAllowed"
+		[showFilters]="etc.dataTable.showFilters"
+		[showBtnDownload]="etc.dataTable.showBtnDownload"
+		[showBtnAdd]="etc.dataTable.showBtnAdd"
+		(clicBtn)="handleAction($event)"
+		(runFilter)="handleFilter($event)"
+		(newRegister)="handleNew($event)"
+	></app-table-multifilter>
+</mat-card>

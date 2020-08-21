@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from '@core/services/theme.service';
+import { etc } from "./multi-filter.etc";
 
 @Component({
   selector: 'app-home',
@@ -10,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   constructor(private themeSvc: ThemeService) { }
 
+  etc = etc
+
   ngOnInit(): void {
   }
 
@@ -18,4 +21,9 @@ export class HomeComponent implements OnInit {
     this.themeSvc.reset();
     this.themeSvc.apply(name);
   }
+
+  printFilter(filters) {
+    console.log(filters)
+  }
+
 }

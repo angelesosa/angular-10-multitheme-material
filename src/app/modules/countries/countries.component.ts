@@ -23,6 +23,7 @@ export class CountriesComponent implements OnInit {
       this.httpClientSvc.get({
         urlOrPath: 'https://restcountries.eu/rest/v2/lang/es',
         loadingOverlay: true,
+        // headers: [{ key: string, value: string }]
       }).subscribe((resp: any) => {
         this.tablePagination.chargeDataTable(resp.map( ( item, i ) => {
           item['pKey'] = i + 1;

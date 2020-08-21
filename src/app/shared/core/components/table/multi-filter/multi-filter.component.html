@@ -5,7 +5,7 @@
 		[selectable]="selectable"
 		[removable]="removable"
 		(removed)="remove(filter)">
-		{{filter.name}}
+		{{filter.label}}
 		<mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
 	  </mat-chip>
 	  <input
@@ -18,9 +18,9 @@
 		(matChipInputTokenEnd)="add($event)">
 	</mat-chip-list>
 	<mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-	  <mat-option *ngFor="let filter of $filtered | async" [value]="filter.id">
-		{{ filter.name }}
+	  <mat-option *ngFor="let filter of $filtered | async" [value]="filter.key">
+		{{ filter.label }}
 	  </mat-option>
 	</mat-autocomplete>
-	<mat-hint>{{ reglas }}</mat-hint>
+	<mat-hint>{{ hint }}</mat-hint>
   </mat-form-field>

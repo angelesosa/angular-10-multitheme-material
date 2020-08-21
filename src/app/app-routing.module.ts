@@ -10,6 +10,7 @@ const routes: Routes = [
       { path: 'home', 		loadChildren: () => import('./modules/home/home.module').then((m) => m.HomeModule) },
       { path: 'tabexample', 		loadChildren: () => import('./modules/tab-example/tab-example.module').then((m) => m.TabExampleModule) },
       { path: 'countries', 	loadChildren: () => import('./modules/countries/countries.module').then(m => m.CountriesModule) },
+      { path: 'products', loadChildren: () => import('./modules/products/products.module').then(m => m.ProductsModule) },
     ],
   },
 ];

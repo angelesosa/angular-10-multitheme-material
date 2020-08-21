@@ -40,7 +40,7 @@
 		</div>
 	</div>
 
-<app-multi-filter></app-multi-filter>
+<app-multi-filter [allFilters]="etc.allFilters" (runFilter)="printFilter($event)" ></app-multi-filter>
 
 
 

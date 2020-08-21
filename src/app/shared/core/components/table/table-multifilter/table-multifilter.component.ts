@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
 import { LocalStorageService } from 'app/shared/core/services/local-storage.service';
 import { ExportCsvService } from '../../../services/export-csv.service';
+import { IFilter } from '../multi-filter/multi-filter.interface';
 
 @Component({
   selector: 'app-table-multifilter',
@@ -21,14 +22,9 @@ export class TableMultifilterComponent implements OnInit {
   @Input() actions = false;
   @Input() index = false;
 
-  @Input() listStatus: any[];
-  @Input() showStatus = false;
-  @Input() statusSelected = '';
-
-  @Input() filters: any[];
+  @Input() filters: IFilter[];
   @Input() showFilters = false;
-  @Input() filterSelected = '';
-  filterValue = '';
+  filterSelected: any[] = [];
 
   @Input() showBtnDownload = false;
   @Input() showBtnAdd = false;
@@ -76,23 +72,13 @@ export class TableMultifilterComponent implements OnInit {
     this.clicBtn.emit( { action: action.action, row } );
   }
 
-  handleStatus(event: string): void {
-    this.statusSelected = event;
-    this.handleRefresh();
-  }
-
-  handleFilterKey(event: string): void {
+  handleFilter(event: any[]): void {
     this.filterSelected = event;
     this.handleRefresh();
   }
 
-  handleFilterValue(event: string): void {
-    this.filterValue = event;
-    this.handleRefresh();
-  }
-
   handleRefresh(): void {
-    this.runFilter.emit( { status: this.statusSelected, filterKey: this.filterSelected, filterValue: this.filterValue } );
+    this.runFilter.emit( this.filterSelected );
   }
 
   handleNew(): void {

@@ -12,6 +12,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MultiFilterModule } from '../multi-filter/multi-filter.module';
 
 @NgModule({
   declarations: [TableMultifilterComponent],
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     FormsModule,
     ReactiveFormsModule,
+    MultiFilterModule,
   ],
   exports: [
     TableMultifilterComponent
