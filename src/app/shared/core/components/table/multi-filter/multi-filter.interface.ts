@@ -3,6 +3,7 @@ export interface IFilter {
   name: string;
   hasOption?: boolean;
   options?: IOption[];
+  reglas?: string;
 }
 
 export interface IOption {

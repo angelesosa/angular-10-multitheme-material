@@ -20,23 +20,27 @@ export class MultiFilterComponent implements OnInit {
   removable = true;
   separatorKeysCodes: number[] = [ENTER];
   filterCtrl = new FormControl();
-  filteredFruits: Observable<IFilter[]>;
+  $filtered: Observable<IFilter[]>;
   filters: IFilter[] = [];
   allFilters: IFilter[] = etc.allFilters;
+  filteredList: IFilter[] = [];
 
+  filterKeySelected = '';
+  hasOptionsSelected = false;
   reglas = '';
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
+  @ViewChild('filterInput') filterInput: ElementRef<HTMLInputElement>;
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {
-    this.filteredFruits = this.filterCtrl.valueChanges.pipe(
+    this.$filtered = this.filterCtrl.valueChanges.pipe(
         startWith(null),
         map((search: string | null) => {
           if(search && search.includes(':')) {
-            return this._filterOptions(search.split(':')[0]).filter(fruit => fruit.name.toLowerCase().indexOf(search.toLowerCase()) === 0);
+            this.filteredList = this._filterOptions(search.split(':')[0]).filter(filter => filter.name.toLowerCase().indexOf(search.toLowerCase()) === 0);
+            return this.filteredList;
           }
-          return search ? this._filter(search) : this.allFilters.slice()
+          return search ? this._filter(search) : this.allFilters.slice();
         }
     ));
   }
@@ -46,15 +50,16 @@ export class MultiFilterComponent implements OnInit {
 
   add(event: MatChipInputEvent): void {
     const value = event.value;
-    console.log('tecla',value )
-    if( !value || ( value.includes(':') && !value.split(':')[1] ))
-      return
-    // Add our fruit
-    this.addFilter(value)
+    if( !value || ( value.includes(':') && !value.split(':')[1] )) {
+      this.filterInput.nativeElement.value = `${value}`;
+      this.filterCtrl.setValue(`${value}`);
+      return;
+    }
+    this.addFilter(value);
   }
 
-  remove(fruit: IFilter): void {
-    const index = this.filters.indexOf(fruit);
+  remove(filter: IFilter): void {
+    const index = this.filters.indexOf(filter);
 
     if (index >= 0) {
       this.filters.splice(index, 1);
@@ -62,40 +67,56 @@ export class MultiFilterComponent implements OnInit {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    console.log('select',event.option.viewValue)
     this.addFilter(event.option.viewValue);
 
   }
 
   private _filter(value: string): IFilter[] {
     const filterValue = value.toLowerCase();
-    return this.allFilters.filter(fruit => fruit.name.toLowerCase().indexOf(filterValue) === 0);
+    this.filterKeySelected = '';
+    this.hasOptionsSelected = false;
+    this.reglas = '';
+    return this.allFilters.filter(filter => filter.name.toLowerCase().indexOf(filterValue) === 0);
   }
 
   private _filterOptions(value: string): IFilter[] {
-    let fruitSelected = this.allFilters.find( fruit => fruit.name.toLowerCase() === value.toLowerCase() ) || {id:'',name:'',hasOption:false,options: []}
-    return fruitSelected.options && fruitSelected.options.map( fruitOption => {
-      let fruit: IFilter= {id: '',name:''};
-      fruit.id = `${fruitSelected.id}/${fruitOption.id}`;
-      fruit.name =  `${fruitSelected.name}:${fruitOption.name}`;
-      return fruit;
+    let filterSelected = this.allFilters.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+    if (!filterSelected) return[];
+    this.filterKeySelected = filterSelected.id;
+    this.hasOptionsSelected = filterSelected.hasOption;
+    this.reglas = filterSelected.reglas;
+    return filterSelected.options && filterSelected.options.map( filterOption => {
+      let filter: IFilter = { id: '', name: '' };
+      filter.id = `${filterSelected.id}/${filterOption.id}`;
+      filter.name =  `${filterSelected.name}:${filterOption.name}`;
+      return filter;
     }) || [];
   }
 
 
 
-  addFilter( value : string ) {
-    if( value.includes(':') ) {
-      let fruitSelected = this.allFilters.find( fruit => fruit.name.toLowerCase() === value.toLowerCase() )
-      fruitSelected && this.filters.push(fruitSelected);
-      this.fruitInput.nativeElement.value = '';
+  addFilter( value: string ): void {
+    if ( value.includes(':') ) {
+      let filterSelected = this.filteredList.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+      this.hasOptionsSelected && filterSelected && this.filters.push( filterSelected );
+      !this.hasOptionsSelected && this.filters.push( this.generateFilter(value) );
+      this.filterInput.nativeElement.value = '';
       this.filterCtrl.setValue(null);
-      this.fruitInput.nativeElement.blur();
+      this.reglas = '';
+      // this.filterInput.nativeElement.blur();
     } else {
-      this.fruitInput.nativeElement.value = `${value}:`;
+      let filterSelected = this.allFilters.find( filter => filter.name.toLowerCase() === value.toLowerCase() );
+      if (!filterSelected) return;
+      this.filterInput.nativeElement.value = `${value}:`;
       this.filterCtrl.setValue(`${value}:`);
-      this.fruitInput.nativeElement
     }
+  }
+
+  generateFilter( value: string ): IFilter {
+    return {
+      id: `${this.filterKeySelected}/${value.split(':')[1]}`,
+      name: value,
+    };
   }
 
 }

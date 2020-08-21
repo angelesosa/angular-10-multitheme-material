@@ -12,12 +12,16 @@ export const etc = {
     {
       id: '2',
       name: 'Lemon',
-      hasOption: false
+      hasOption: false,
+      options: [],
+      reglas: 'Escribe las partes de un limon, JA!'
     },
     {
       id: '3',
       name: 'Lime',
-      hasOption: false
+      hasOption: false,
+      options: [],
+      reglas: 'Escribe lo q quieras, igual no me gusta'
     },
     {
       id: '4',
@@ -31,7 +35,9 @@ export const etc = {
     {
       id: '5',
       name: 'Strawberry',
-      hasOption: false
+      hasOption: false,
+      options: [],
+      reglas: 'Ingresa los ingredientes de una receta con fresa'
     },
   ],
 };
