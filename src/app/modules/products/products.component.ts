@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TableMultifilterComponent } from '@core/components/table/table-multifilter/table-multifilter.component';
 import { etc } from './products.etc';
-import { HttpClientService } from '@common/services/http-client.service';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IProduct } from './products.interface';
+import { ToasterService } from '../../shared/core/services/toaster.service';
+import { ProductsService } from './products.service';
+import { filter, switchMap } from 'rxjs/operators';
+import { ConfirmDialogService } from '../../shared/common/components/confirm-dialog/confirm-dialog.service';
 
 @Component({
   selector: 'app-products',
@@ -13,61 +16,122 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ProductsComponent implements OnInit {
 
   etc = etc;
-  countries: any[] = [];
+  countries: IProduct[] = [];
   filters: any[] = [];
+
+  filtersAllowed = [];
+
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiY2FybG9zLnRlZXZpbkBnbWFpbC5jb20iLCJ0b2tlbkdlbmVyYXRpb25UaW1lc3RhbXAiOjE1OTgxNDEzMjkzMDQsInRva2VuRXhwaXJhdGlvblRpbWVzdGFtcCI6MTU5ODE4NDUyOTMwNCwiaWF0IjoxNTk4MTQxMzI5fQ.m0fgtwGt8AzJ_JtpOeTh4-dhGdpZOSA9i0ZkFZtJTEI';
+
+  headers = [
+    { key: `user_id`,  val: `1`},
+    { key: `user_token`,  val: `${this.token}`},
+  ];
 
   @ViewChild(TableMultifilterComponent)
   tableMultifilter: TableMultifilterComponent;
 
   constructor(
-    private httpClient: HttpClient,
-    private httpClientSvc: HttpClientService,
-    private router: Router
+    private productSvc: ProductsService,
+    private toast: ToasterService,
+    private router: Router,
+    private confirmSvc: ConfirmDialogService,
   ) {
     this.getProducts();
   }
 
-  getProducts():void {
-
-    let httpHeaders = new HttpHeaders();
-    httpHeaders = httpHeaders.set('Content-type', 'application/json; charset=utf-8');
-    // let httpHeaders = new HttpHeaders({'Content-Type':'application/json; charset=utf-8'});
-    httpHeaders = httpHeaders.append('user_id', '1');
-    httpHeaders = httpHeaders.append('user_token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiY2FybG9zLnRlZXZpbkBnbWFpbC5jb20iLCJ0b2tlbkdlbmVyYXRpb25UaW1lc3RhbXAiOjE1OTgwMzkzODA3ODQsInRva2VuRXhwaXJhdGlvblRpbWVzdGFtcCI6MTU5ODA4MjU4MDc4NCwiaWF0IjoxNTk4MDM5MzgwfQ.m8rey7sfYk88NxPHAK27OuQj5g-HUDLxoLgS8ZOzmwQ');
+  getProducts(): void {
+    let headers = [
+      { key: `user_id`,  val: `1`},
+      { key: `user_token`,  val: `${this.token}`},
+    ];
     if (this.filters.length) {
-      httpHeaders = httpHeaders.append( 'filters', JSON.stringify(this.filters) );
+      headers.push( { key: 'filters', val: JSON.stringify(this.filters) } );
     }
-    this.httpClient.get('https://888fibo.proyectoexiste.com/customer/v1/products', {
-        headers: httpHeaders,
-      }).subscribe((resp: any) => {
-        this.tableMultifilter.chargeDataTable(resp.data.items.map( ( item, i ) => {
-          item['active'] = etc.active[item.active].label;
-          item['actions'] = etc.listActions;
-          return item;
-        }));
-      });
+    this.productSvc.items( { headers: headers } ).subscribe({
+      next: (result) => {
+        this.toast.success( { message: result['kindMessage'] } );
+        this.tableMultifilter.chargeDataTable({
+          rows: result.data.items.map(( item, i ) => {
+            let actions = etc.listActions();
+            !item.active && (actions.deactive.show = false);
+            item.active && (actions.active.show = false);
+            item['actions'] = Object.values(actions);
+            item['active'] = etc.active[item.active].label;
+            return item;
+          }),
+          filters: result.filtersAllowed
+        });
+        this.filtersAllowed = result.filtersAllowed;
+      },
+      error: (err) => {
+        // this.loadingOverlay.hide();
+        this.toast.error( { message: err['kindMessage'] } );
+      }
+    });
+
   }
 
   ngOnInit(): void {
   }
 
   handleFilter(event: any): void {
-    console.log(event);
     this.filters = event;
     this.getProducts();
   }
 
   handleNew(event: any): void {
-    this.router.navigate([`/countries/write/new`]);
+    this.router.navigate([`/products/write/new`]);
   }
 
   handleAction(event): void {
-    const action = etc.listActions.find((item) => item.action === event.action);
+    const actions = Object.values(etc.listActions());
+    const action = actions.find((item) => item.action === event.action);
     this[action.function](event.row);
   }
 
-  handleEdit(row: any): void {
-    console.log(row);
+  handleEdit(row: IProduct): void {
+    this.router.navigate([`/products/write/${row.productId}`]);
+  }
+
+  handleActive(item: IProduct): void {
+    this.confirmSvc
+      .confirm({msg: `Esta a punto de activar el pais (${item.productId}). ¿Proceder?`})
+      .pipe(
+        filter((confirm) => confirm),
+        switchMap(() => {
+          return this.productSvc.activateItem({ id: item.productId, headers: this.headers });
+        })
+      )
+      .subscribe({
+        next: (result) => {
+          this.getProducts();
+          this.toast.success( { message: result['kindMessage'] } );
+        },
+        error: (err) => {
+          this.toast.error( { message: err['kindMessage'] } );
+        }
+      });
+  }
+
+  handleDeactive(item: IProduct): void {
+    this.confirmSvc
+      .confirm({msg: `Esta a punto de desactivar el pais (${item.productId}). ¿Proceder?`})
+      .pipe(
+        filter((confirm) => confirm),
+        switchMap(() => {
+          return this.productSvc.deactivateItem({ id: item.productId, headers: this.headers });
+        })
+      )
+      .subscribe({
+        next: (result) => {
+          this.getProducts();
+          this.toast.success( { message: result['kindMessage'] } );
+        },
+        error: (err) => {
+          this.toast.error( { message: err['kindMessage'] } );
+        }
+      });
   }
 
 }

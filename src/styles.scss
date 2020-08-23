@@ -5,6 +5,7 @@
 // settings
 @import './app/shared/core/scss/core';
 @import './app/shared/common/styles/forms';
+@import './app/shared/common/styles/dialog';
 
 // carga unica del core de material
 @include mat-core();

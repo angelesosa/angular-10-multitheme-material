@@ -48,7 +48,7 @@
 				<th mat-header-cell *matHeaderCellDef> ACCIONES </th>
 				<td mat-cell *matCellDef="let row; let i = index">
 					<ng-container *ngFor="let action of row.actions">
-						<button mat-icon-button (click)="handleAction( action, row )" [matTooltip]="action.label">
+						<button mat-icon-button (click)="handleAction( action, row )" [matTooltip]="action.label" [matTooltipPosition]="'left'" *ngIf="action.show">
 							<mat-icon [ngStyle]="{'color': action.color }">{{ action.icon }}</mat-icon>
 						</button>
 					</ng-container>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  MULTILANG_API_URL: 'http://127.0.0.1:51791',
+  ANTIFRAUDE_API_URL: 'https://888fibo.proyectoexiste.com/customer/v1',
   GENERAL_API_KEY: '%9*e%c86B57dQNH4#X%*9qQ%X$q369',
 };
 

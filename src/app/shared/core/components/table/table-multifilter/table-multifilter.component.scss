@@ -5,6 +5,9 @@ table {
   &-pKey {
     min-width: 60px !important;
   }
+  &-actions {
+    min-width: 160px !important;
+  }
 }
 
 .table-container {
@@ -81,5 +84,13 @@ mat-form-field.mat-form-field {
 :host ::ng-deep .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
   transform: translateY(-1.0em) scale(.75);
   width: 133.5%;
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-select-arrow-wrapper {
+  transform: translateY(0%);
+}
+
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: .4em;
 }
 

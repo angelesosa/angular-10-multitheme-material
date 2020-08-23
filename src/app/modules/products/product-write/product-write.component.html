@@ -1,0 +1,114 @@
+<div class="container">
+	<div class="row animate__animated animate__fadeInUp">
+		<div class="col-12">
+			<form [formGroup]="form">
+				<mat-card>
+					<div class="row">
+						<div class="col-12">
+							<h3>
+								{{
+									pageType == "new"
+										? "Registrar "
+										: "Actualizar "
+								}}
+								Product
+							</h3>
+						</div>
+
+						<app-form-field-select
+							class="col-12"
+							appearance="outline"
+							formControlName="productTypeId"
+							label="Tipo Producto *"
+							[options]="productTypes"
+							[display]="'name'"
+							[key]="'productTypeId'"
+							[error]="form.controls['productTypeId']"
+						></app-form-field-select>
+
+						<app-form-field-input
+							class="col-12"
+							appearance="outline"
+							formControlName="productId"
+							[type]="'text'"
+							label="Producto ID *"
+							[error]="form.controls['productId']"
+							[isReadonly]="pageType != 'new'"
+						>
+						</app-form-field-input>
+
+						<app-form-field-input
+							class="col-12"
+							appearance="outline"
+							formControlName="name"
+							[type]="'text'"
+							label="Nombre *"
+							[error]="form.controls['name']"
+						>
+						</app-form-field-input>
+
+						<app-form-field-textarea
+							class="col-12"
+							rows="3"
+							appearance="outline"
+							formControlName="description"
+							label="Descripcion *"
+							[error]="form.controls['description']"
+						>
+						</app-form-field-textarea>
+
+						<app-form-field-input
+							class="col-12"
+							appearance="outline"
+							formControlName="price"
+							[type]="'text'"
+							label="Precio *"
+							[error]="form.controls['price']"
+						>
+						</app-form-field-input>
+
+						<app-form-radio-group
+							class="col-12"
+							formControlName="sponsorPayment"
+							direction="horizontal"
+							[options]="sponsorOptions"
+							[display]="'name'"
+							[key]="'id'"
+							label="Pago a Sponsor *"
+						>
+						</app-form-radio-group>
+
+						<div class="col-12">
+							<div class="d-flex buttons-submit">
+								<button
+									(click)="handleCancel()"
+									mat-stroked-button
+									color="warn"
+								>
+									CANCELAR
+								</button>
+								<button
+									(click)="
+										pageType == 'new'
+											? handleNewItem()
+											: handleUpdItem()
+									"
+									#submit
+									[disabled]="!form.valid"
+									mat-raised-button
+									color="primary"
+								>
+									{{
+										pageType == "new"
+											? "REGISTRAR"
+											: "ACTUALIZAR"
+									}}
+								</button>
+							</div>
+						</div>
+					</div>
+				</mat-card>
+			</form>
+		</div>
+	</div>
+</div>

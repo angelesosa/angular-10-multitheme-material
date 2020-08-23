@@ -6,7 +6,6 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { IFilter } from './multi-filter.interface';
-import { etc } from "./multi-filter.etc";
 
 @Component({
   selector: 'app-multi-filter',
@@ -36,6 +35,13 @@ export class MultiFilterComponent implements OnInit {
   @ViewChild('auto') matAutocomplete: MatAutocomplete;
 
   constructor() {
+    this.chargeFilter();
+  }
+
+  ngOnInit(): void {
+  }
+
+  chargeFilter(): void {
     this.$filtered = this.filterCtrl.valueChanges.pipe(
         startWith(null),
         map((search: string | null) => {
@@ -46,9 +52,6 @@ export class MultiFilterComponent implements OnInit {
           return search ? this._filter(search) : this.allFilters.slice();
         }
     ));
-  }
-
-  ngOnInit(): void {
   }
 
   add(event: MatChipInputEvent): void {
@@ -96,8 +99,6 @@ export class MultiFilterComponent implements OnInit {
     }) || [];
   }
 
-
-
   addFilter( value: string ): void {
     if ( value.includes(':') ) {
       let filterSelected = this.filteredList.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
@@ -123,7 +124,7 @@ export class MultiFilterComponent implements OnInit {
     };
   }
 
-  handleGenerateFilter() {
+  handleGenerateFilter(): void {
     const filters = this.filters.map( item => {
       return {
         key: item.key.split('/')[0],

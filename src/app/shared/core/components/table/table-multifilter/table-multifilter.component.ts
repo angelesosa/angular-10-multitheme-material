@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { LocalStorageService } from 'app/shared/core/services/local-storage.service';
 import { ExportCsvService } from '../../../services/export-csv.service';
 import { IFilter } from '../multi-filter/multi-filter.interface';
+import { MultiFilterComponent } from '../multi-filter/multi-filter.component';
 
 @Component({
   selector: 'app-table-multifilter',
@@ -32,6 +33,10 @@ export class TableMultifilterComponent implements OnInit {
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>([]);
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+
+  @ViewChild(MultiFilterComponent)
+  multifilter: MultiFilterComponent;
 
 
   @Output() clicBtn = new EventEmitter();
@@ -63,9 +68,10 @@ export class TableMultifilterComponent implements OnInit {
     return this.displayedColumns;
   }
 
-  chargeDataTable(rows: []): void {
+  chargeDataTable({rows, filters}): void {
     this.dataSource = new MatTableDataSource<any>(rows);
     this.dataSource.paginator = this.paginator;
+    this.multifilter.chargeFilter();
   }
 
   handleAction(action, row: any): void {
