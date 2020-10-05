@@ -21,7 +21,7 @@ export class ErrorMessage {
       'invalid_url': 'La url ingresada no es válida.',
       // 'invalid_password': 'La contraseña ingresada no es válida.',
       'invalid_password': 'Tu contraseña debe tener entre 5 y 20 caracteres, una minúscula, una mayúscula y un número.',
-      // 'limitMinMax': `El monto debe estar entre $ ${Utils.format().toMoney(value.min)} - $ ${Utils.format().toMoney(value.max)}`,
+      'limitMinMax': `El valor debe estar entre ${value.min} - ${value.max}`,
       'invalid_characters': (matches: any[]) => {
         let matchedCharacters = matches;
         matchedCharacters = matchedCharacters.reduce((characterString, character, index) => {
@@ -34,7 +34,8 @@ export class ErrorMessage {
         }, '');
         return `Estos caracteres no estan permitidos: ${matchedCharacters}`;
       },
-      'mustBeCheckedError': 'Este campo es requerido'
+      'mustBeCheckedError': 'Este campo es requerido.',
+      'invalid_ipAddress': 'La IP ingresado no es válida.',
     }
 
     return messages[name]

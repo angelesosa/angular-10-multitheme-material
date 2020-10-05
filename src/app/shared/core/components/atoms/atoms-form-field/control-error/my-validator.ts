@@ -40,9 +40,18 @@ export class MyValidator extends Validators {
   static limitMinMax(min: number, max: number): ValidatorFn {
     return (control: FormControl) => {
       if (control.value && !isNaN(control.value)) {
-        let value = parseFloat(control.value) * 100;
+        let value = parseFloat(control.value);
         return value > max || value < min ? { limitMinMax: { min, max } } : null
       }
+      return null;
+    }
+  }
+
+  static validateIpAddress(control: FormControl) {
+    if (control.value && control.value.length > 0) {
+      return (control.value.match(SCHEMA.ipAddress)) ? null : { invalid_ipAddress: true };
+    }
+    else {
       return null;
     }
   }

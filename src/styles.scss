@@ -19,7 +19,9 @@
 @import './app/shared/common/components/side-nav-menu-group/side-nav-menu-group.component.scss-theme.scss';
 @import './app/shared/common/layouts/side-nav-item-layout/side-nav-item-layout.component.scss-theme.scss';
 @import './app/shared/common/components/logo/logo.component.scss-theme.scss';
+@import './app/shared/common/components/title/title.component.scss-theme.scss';
 @import './app/shared/core/components/table/table-pagination/table-pagination.component.scss-theme.scss';
+@import './app/shared/core/components/table/table-multifilter/table-multifilter.component.scss-theme.scss';
 @import './app/shared/common/components/side-nav-menu-item/side-nav-menu-item.component.scss-theme.scss';
 @import './app/shared/common/components/toolbar-profile-icon/toolbar-profile-icon.component.scss-theme.scss';
 @import './app/shared/common/layouts/toolbar-profile-menu-layout/toolbar-profile-menu-layout.component.scss-theme.scss';
@@ -29,8 +31,10 @@
 @mixin app-components-theme($theme) {
 	@include app-side-nav-menu-group-theme($theme);
 	@include app-logo-theme($theme);
+	@include app-title-theme($theme);
 	@include app-side-nav-item-layout-theme($theme);
 	@include app-table-pagination-theme($theme);
+	@include app-table-multifilter-theme($theme);
 	@include app-side-nav-menu-item-theme($theme);
 	@include app-toolbar-profile-icon-theme($theme);
 	@include app-toolbar-profile-menu-layout-theme($theme);

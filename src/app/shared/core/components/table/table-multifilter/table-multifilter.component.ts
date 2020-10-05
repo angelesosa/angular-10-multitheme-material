@@ -29,6 +29,8 @@ export class TableMultifilterComponent implements OnInit {
 
   @Input() showBtnDownload = false;
   @Input() showBtnAdd = false;
+  @Input() showBtnReload = false;
+  @Input() showChooseColumns = false;
 
   displayedColumns: string[] = [];
   dataSource = new MatTableDataSource<any>([]);
@@ -61,7 +63,7 @@ export class TableMultifilterComponent implements OnInit {
     if (lsCols) {
       this.displayedColumns = lsCols;
     } else {
-      this.displayedColumns = this.columns.map(column => column.key );
+      this.displayedColumns = this.columns.filter(column => column.show).map(column => column.key );
       this.index && this.displayedColumns.unshift('index');
       this.actions && this.displayedColumns.push('actions');
     }
@@ -71,7 +73,7 @@ export class TableMultifilterComponent implements OnInit {
   chargeDataTable({rows, filters}): void {
     this.dataSource = new MatTableDataSource<any>(rows);
     this.dataSource.paginator = this.paginator;
-    this.multifilter.chargeFilter();
+    this.showFilters && this.multifilter.chargeFilter();
   }
 
   handleAction(action, row: any): void {

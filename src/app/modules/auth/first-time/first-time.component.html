@@ -1,0 +1,99 @@
+<div class="content__login">
+	<form novalidate [formGroup]="form">
+		<div class="row justify-content-center align-center">
+			<div class="col-12">
+				<h2>CAMBIA TU CONTRASEÑA</h2>
+			</div>
+
+			<app-form-field-input
+				class="col-12"
+				appearance="outline"
+				formControlName="oldPassword"
+				[type]="typeOldPass"
+				label="Contraseña *"
+				alignIcon="right"
+				[icon]="iconOldPass"
+				(clickIcon)="clickIconOldPass()"
+				[error]="form.controls['oldPassword']"
+			>
+			</app-form-field-input>
+
+			<app-form-field-input
+				class="col-12"
+				appearance="outline"
+				formControlName="newPassword"
+				[type]="typePass"
+				label="Contraseña *"
+				alignIcon="right"
+				[icon]="iconPass"
+				(clickIcon)="clickIconPass()"
+			>
+			</app-form-field-input>
+
+			<div class="col-12 align-left">
+				<div class="cta-list">
+					<div
+						class="cta-item"
+						[ngClass]="
+							f['newPassword'].hasError('required') ||
+							f['newPassword'].hasError('minlength')
+								? 'incomplete'
+								: 'done'
+						"
+					>
+						<mat-icon>check_circle_outline</mat-icon>
+						<span>Entre 5 a 20 caracteres</span>
+					</div>
+					<div
+						class="cta-item"
+						[ngClass]="
+							f['newPassword'].hasError('required') ||
+							f['newPassword'].hasError('hasSmallCase')
+								? 'incomplete'
+								: 'done'
+						"
+					>
+						<mat-icon>check_circle_outline</mat-icon>
+						<span>Al menos una minúscula</span>
+					</div>
+					<div
+						class="cta-item"
+						[ngClass]="
+							f['newPassword'].hasError('required') ||
+							f['newPassword'].hasError('hasCapitalCase')
+								? 'incomplete'
+								: 'done'
+						"
+					>
+						<mat-icon>check_circle_outline</mat-icon>
+						<span>Al menos una mayúscula</span>
+					</div>
+					<div
+						class="cta-item"
+						[ngClass]="
+							f['newPassword'].hasError('required') ||
+							f['newPassword'].hasError('hasNumber')
+								? 'incomplete'
+								: 'done'
+						"
+					>
+						<mat-icon>check_circle_outline</mat-icon>
+						<span>Al menos una número</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+				<button
+					(click)="handleSubmit()"
+					#submit
+					[disabled]="!form.valid"
+					class="form-submit"
+					mat-raised-button
+					color="primary"
+				>
+					¡EMPIEZA!
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

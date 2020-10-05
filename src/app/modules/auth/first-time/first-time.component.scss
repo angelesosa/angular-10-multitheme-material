@@ -1,0 +1,23 @@
+.cta-item {
+  display: flex;
+  align-items: center;
+  margin-top: .5rem;
+  &:first-child {
+    margin-top: 0;
+  }
+  &.incomplete{
+    color: #b0b0b0;
+  }
+  &.done {
+    color: inherit;
+  }
+
+  & span {
+    margin-left: .5rem;
+  }
+}
+
+.content__login {
+  margin: 0 2rem;
+  text-align: center;
+}

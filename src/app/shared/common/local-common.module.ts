@@ -10,9 +10,14 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ConfirmLogoutComponent } from './components/confirm-dialog/confirm-logout.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AtomsFormFieldModule } from '../../shared/core/components/atoms/atoms-form-field/atoms-form-field.module';
 // const routerChildren: Routes = [];
 @NgModule({
   declarations: [
@@ -22,11 +27,13 @@ import { MatDividerModule } from '@angular/material/divider';
     LoadingComponent,
     LoadingOverlayComponent,
     ConfirmDialogComponent,
-    ConfirmLogoutComponent
+    ConfirmLogoutComponent,
+    ChangePasswordComponent
   ],
   entryComponents: [
     ConfirmDialogComponent,
     ConfirmLogoutComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +41,12 @@ import { MatDividerModule } from '@angular/material/divider';
     MatTabsModule,
     MatDialogModule,
     MatButtonModule,
+    MatIconModule,
     MatDividerModule,
+    MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AtomsFormFieldModule,
     ToastrModule.forRoot({
       maxOpened: 1,
       autoDismiss: true,

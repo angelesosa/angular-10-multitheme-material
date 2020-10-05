@@ -53,8 +53,10 @@ export const etc = {
     //   { key: 'active', label: 'Active' }
     // ],
     showFilters: true,
+    showBtnReload: true,
     showBtnDownload: true,
     showBtnAdd: true,
+    showChooseColumns: true,
   },
   active: {
     0: {

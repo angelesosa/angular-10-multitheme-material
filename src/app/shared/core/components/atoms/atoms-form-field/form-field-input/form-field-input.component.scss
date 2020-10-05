@@ -2,6 +2,10 @@ mat-form-field {
   width: 100%;
 }
 
+mat-icon {
+  cursor: pointer;
+}
+
 :host ::ng-deep .mat-form-field-appearance-outline  .mat-form-field-flex > .mat-form-field-infix {
   padding: 0.15em 0 0.55em 0 !important;
   border-top: 0.64375em solid transparent;
@@ -32,3 +36,6 @@ mat-form-field {
   width: 133.5%;
 }
 
+:host ::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+  top: .45em;
+}

@@ -11,7 +11,7 @@ export class ProductsService {
 
   SUBJECT = 'products';
 
-  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiY2FybG9zLnRlZXZpbkBnbWFpbC5jb20iLCJ0b2tlbkdlbmVyYXRpb25UaW1lc3RhbXAiOjE1OTgxNDEzMjkzMDQsInRva2VuRXhwaXJhdGlvblRpbWVzdGFtcCI6MTU5ODE4NDUyOTMwNCwiaWF0IjoxNTk4MTQxMzI5fQ.m0fgtwGt8AzJ_JtpOeTh4-dhGdpZOSA9i0ZkFZtJTEI';
+  token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiY2FybG9zLnRlZXZpbkBnbWFpbC5jb20iLCJ0b2tlbkdlbmVyYXRpb25UaW1lc3RhbXAiOjE2MDE4NTU4MTg0MzUsInRva2VuRXhwaXJhdGlvblRpbWVzdGFtcCI6MTYwMTg5OTAxODQzNSwiaWF0IjoxNjAxODU1ODE4fQ.v--XYcSOCqKXf63MCmhshDEB5ncDbPk9yd7EXHo1tzI';
 
   headers = [
     { key: `user_id`,  val: `1`},

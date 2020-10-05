@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+
+@mixin app-title-theme($theme) {
+  $config_color: map-get($theme, color);
+	$primary: map-get($theme, primary);
+  $background: map-get($config_color, background);
+  $foreground: map-get($config_color, foreground);
+
+  // @debug "|==> map_background: #{ $theme }";
+  app-title {
+
+    .header-content {
+      background-color: mat-color($background, "card") !important;
+      color: mat-color($foreground, text) !important;
+      border-bottom: 2px solid mat-color($primary);
+      margin-bottom: 16px;
+    }
+
+  }
+
+}

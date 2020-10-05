@@ -21,13 +21,17 @@
 			<mat-icon svgIcon="shield-account"></mat-icon>
 			<span>Mi cuenta</span>
 		</button>
-		<button mat-menu-item>
+		<button mat-menu-item (click)="handleChangePass()">
 			<mat-icon>lock</mat-icon>
 			<span>Cambiar contraseña</span>
 		</button>
-		<button mat-menu-item>
+		<button mat-menu-item (click)="handleLogout()">
 			<mat-icon>exit_to_app</mat-icon>
-			<span>Cerrar session en todas las cuentas</span>
+			<span>Cerrar esta session</span>
+		</button>
+		<button mat-menu-item (click)="handleCloseAllSession()">
+			<mat-icon>exit_to_app</mat-icon>
+			<span>Cerrar todas las sessiones</span>
 		</button>
 	</ng-container>
 	<ng-container profilemenu__footer></ng-container>

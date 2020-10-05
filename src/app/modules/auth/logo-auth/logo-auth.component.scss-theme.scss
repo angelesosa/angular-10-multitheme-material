@@ -1,0 +1,15 @@
+@import "~@angular/material/theming";
+
+@mixin app-logo-auth-theme($theme) {
+	$primary: map-get($theme, primary);
+
+	$foreground: map-get($theme, foreground);
+
+	app-logo-auth {
+		svg .minilogo {
+			fill-rule: evenodd;
+			clip-rule: evenodd;
+			fill: mat-color($primary);
+		}
+	}
+}

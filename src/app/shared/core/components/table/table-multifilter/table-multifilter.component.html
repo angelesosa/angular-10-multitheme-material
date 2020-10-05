@@ -1,35 +1,35 @@
 
-<div class="table-wrapper mat-elevation-z8">
+<div class="table__wrapper mat-elevation-z8">
 
-	<div class="row btn__action">
+	<div class="table__headers">
 
-		<div class="col-12 col-lg-9 col-xl-8" *ngIf="showFilters">
+		<div class="table__headers__filter">
 
-			<app-multi-filter [allFilters]="filters" (runFilter)="handleFilter($event)"></app-multi-filter>
+			<app-multi-filter [allFilters]="filters" (runFilter)="handleFilter($event)" *ngIf="showFilters"></app-multi-filter>
 
 		</div>
 
-		<div class="col-12 col-lg-3 col-xl-4 btn__header">
-			<div class="row">
-				<button mat-icon-button color="primary" class="mx-1" (click)="handleRefresh()">
-					<mat-icon>replay</mat-icon>
-				</button>
-				<button mat-icon-button color="primary" class="mx-1" (click)="exportToCsv()" *ngIf="showBtnDownload">
-					<mat-icon>get_app</mat-icon>
-				</button>
-				<button mat-stroked-button color="primary" class="mx-1" (click)="handleNew()" *ngIf="showBtnAdd">
-					<mat-icon>add</mat-icon>
-					Agregar
-				</button>
-			</div>
+		<div class="table__headers__buttons" *ngIf="showBtnReload || showBtnDownload || showBtnAdd">
+			<button mat-icon-button color="primary" class="mx-1" (click)="handleRefresh()" *ngIf="showBtnReload">
+				<mat-icon>replay</mat-icon>
+			</button>
+			<button mat-icon-button color="primary" class="mx-1" (click)="exportToCsv()" *ngIf="showBtnDownload">
+				<mat-icon>get_app</mat-icon>
+			</button>
+			<button mat-stroked-button color="primary" class="mx-1" (click)="handleNew()" *ngIf="showBtnAdd">
+				<mat-icon>add</mat-icon>
+				Agregar
+			</button>
 		</div>
+	</div>
 
+	<div class="row px-3" *ngIf="showBtnReload || showBtnDownload || showBtnAdd">
 		<div class="col-12">
 			<mat-divider></mat-divider>
 		</div>
-
 	</div>
-	<div class="table-container">
+
+	<div class="table__container">
 		<table mat-table [dataSource]="dataSource">
 
 			<!-- index Column -->
@@ -60,9 +60,9 @@
 
 		</table>
 	</div>
-	<div class="row btn__action">
+	<div class="table__footer">
 
-		<div class="col-12 col-lg-4">
+		<div class="table__footer__options" *ngIf="showChooseColumns">
 
 			<mat-form-field appearance="outline">
 				<mat-label>Columnas</mat-label>
@@ -77,7 +77,7 @@
 			</mat-form-field>
 
 		</div>
-		<div class="clo-12 col-lg-8">
+		<div class="table__footer__paginator">
 
 			<mat-paginator [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
 			</mat-paginator>

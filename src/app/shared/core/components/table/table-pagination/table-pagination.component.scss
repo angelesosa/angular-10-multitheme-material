@@ -19,6 +19,7 @@ table {
 
 .table-wrapper {
   position: relative;
+  border-radius: 6px;
 }
 
 .mat-column-index {
@@ -38,21 +39,13 @@ td.mat-cell {
 }
 
 th.mat-header-cell {
+  font-size: 14px;
   padding: 0 8px !important;
 }
 
 .btn__action {
   padding: 8px 16px;
 }
-
-.table-wrapper {
-  border-radius: 6px;
-}
-
-// mat-paginator.mat-paginator {
-  // border-bottom-left-radius: 6px;
-  // border-bottom-right-radius: 6px;
-// }
 
 mat-form-field.mat-form-field {
   display: block;

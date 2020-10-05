@@ -1,0 +1,50 @@
+<div class="content__login">
+	<form [formGroup]="form" novalidate>
+		<div class="row">
+			<div class="col-12">
+				<h2>INGRESE A SU CUENTA</h2>
+			</div>
+			<div class="col-12">
+				<app-form-field-input
+					appearance="outline"
+					formControlName="email"
+					[type]="'email'"
+					label="Correo electrónico *"
+					alignIcon="right"
+					[icon]="'alternate_email'"
+					[error]="form.controls['email']"
+				>
+				</app-form-field-input>
+			</div>
+
+			<div class="col-12">
+				<app-form-field-input
+					appearance="outline"
+					formControlName="password"
+					[type]="typePass"
+					label="Contraseña *"
+					alignIcon="right"
+					[icon]="iconPass"
+					(clickIcon)="clickIconPass()"
+					[error]="form.controls['password']"
+				>
+				</app-form-field-input>
+			</div>
+			<div class="col-12">
+				<!-- <a routerLink="/r/recovery-password" class="text-primary">Olvide mi contraseña</a> -->
+			</div>
+			<div class="col-12">
+				<button
+					class="form-submit"
+					#submit
+					[disabled]="!form.valid"
+					(click)="handleSubmit()"
+					mat-raised-button
+					color="primary"
+				>
+					INICIAR SESIÓN
+				</button>
+			</div>
+		</div>
+	</form>
+</div>

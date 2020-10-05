@@ -4,8 +4,8 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, map } from 'rxjs/operators';
 import { environment } from 'environments/environment';
-import { LocalStorageService } from '@core/services/local-storage.service';
 import { ToasterService } from '@core/services/toaster.service';
+import { SessionService } from '../../../modules/auth/session.service';
 
 interface FilterAllow {
   key: string;
@@ -40,7 +40,7 @@ export class HttpClientService {
   constructor(
     private httpClient: HttpClient,
     private loadingOverlay: LoadingOverlayService,
-    private lsSvc: LocalStorageService,
+    private sessionSvc: SessionService,
     private toastSvc: ToasterService
   ) {}
 
@@ -174,6 +174,46 @@ export class HttpClientService {
       );
   }
 
+  delete<T>({
+    nameAPI = '',
+    urlOrPath = '',
+    headers = [],
+    jsonParse = true,
+    addCredentials = false,
+    addApiKey = false,
+    addContentTypeJson = true,
+    loadingOverlay = false,
+    showErrToastMsg = true,
+  }): Observable<IHttpResponse<T>> {
+    // url
+    const url = this.buildUrl({ nameAPI, urlOrPath });
+    // headers
+    const securityHeaders = addCredentials ? this.getCredentialsHeaders() : [];
+    const apiKeyHeaders = addApiKey ? this.getApiKey() : [];
+    const httpHeaders = this.buildHeaders({
+      headers: [...headers, ...securityHeaders, ...apiKeyHeaders],
+      addContentTypeJson,
+    });
+    // loading
+    loadingOverlay && this.loadingOverlay.show();
+    //+
+    return this.httpClient
+      .delete<IHttpResponse<T>>(url, {
+        headers: httpHeaders,
+      })
+      .pipe(
+        map((result) => {
+          loadingOverlay && this.loadingOverlay.hide();
+          return result;
+        }),
+        catchError((httpError) => {
+          loadingOverlay && this.loadingOverlay.hide();
+          showErrToastMsg && this.toastSvc.error({ message: this.getErrorMsg(httpError) });
+          return throwError(httpError.error);
+        })
+      );
+  }
+
   private buildHeaders({ headers, addContentTypeJson }): HttpHeaders {
     let httpHeaders = new HttpHeaders();
     if (addContentTypeJson) httpHeaders.set('Content-type', 'application/json');
@@ -206,10 +246,10 @@ export class HttpClientService {
   }
 
   private getCredentialsHeaders() {
-    const session = this.lsSvc.getItem('xDolYs') || {};
+    const session = this.sessionSvc.getSession() || {};
     return [
-      { key: 'user_id', val: session.userId || '' },
-      { key: 'user_token', val: session.token || '' },
+      { key: 'user_id', val: `${session.userId}` },
+      { key: 'user_token', val: `${session.token}` },
     ];
   }
 

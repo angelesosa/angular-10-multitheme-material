@@ -86,7 +86,7 @@ export class MultiFilterComponent implements OnInit {
   }
 
   private _filterOptions(value: string): IFilter[] {
-    let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
+    let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase().trim() === value.toLowerCase() );
     if (!filterSelected) return[];
     this.filterKeySelected = filterSelected.key;
     this.hasOptionsSelected = filterSelected.hasOption;
@@ -101,7 +101,7 @@ export class MultiFilterComponent implements OnInit {
 
   addFilter( value: string ): void {
     if ( value.includes(':') ) {
-      let filterSelected = this.filteredList.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
+      let filterSelected = this.filteredList.find( filter => filter.label.toLowerCase().trim() === value.toLowerCase() );
       this.hasOptionsSelected && filterSelected && this.filters.push( filterSelected );
       !this.hasOptionsSelected && this.filters.push( this.generateFilter(value) );
       this.filterInput.nativeElement.value = '';
@@ -110,7 +110,7 @@ export class MultiFilterComponent implements OnInit {
       this.handleGenerateFilter();
       // this.filterInput.nativeElement.blur();
     } else {
-      let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase() === value.toLowerCase() );
+      let filterSelected = this.allFilters.find( filter => filter.label.toLowerCase().trim() === value.toLowerCase() );
       if (!filterSelected) return;
       this.filterInput.nativeElement.value = `${value}:`;
       this.filterCtrl.setValue(`${value}:`);

@@ -1,0 +1,19 @@
+.container-auth {
+  height: 100vh;
+  width: 100vw;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: auto;
+
+  .auth{
+    display: flex;
+    max-width: 500px;
+  }
+
+  .logo-app {
+    height: 100px;
+    width: 300px;
+  }
+}
